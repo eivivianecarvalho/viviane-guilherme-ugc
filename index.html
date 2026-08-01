@@ -308,6 +308,11 @@
     border-radius: 6px;
     overflow:hidden;
   }
+  .polaroid-foto img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+  }
   .polaroid-legenda{
     display:block;
     font-family: var(--fonte-charme);
@@ -336,6 +341,11 @@
     overflow:hidden;
     box-shadow: var(--sombra);
   }
+  .foto-capa img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+  }
   .foto-capa .legenda-foto{
     position:absolute;
     left: 16px;
@@ -356,6 +366,8 @@
     display:grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 30px 22px;
+    max-width: 420px;
+    margin: 0 auto;
   }
   .grade-fotos-sobre .polaroid:nth-child(1){ transform: rotate(-5deg); }
   .grade-fotos-sobre .polaroid:nth-child(2){ transform: rotate(4deg); margin-top: 20px; }
@@ -365,7 +377,7 @@
   /* ========== FAIXA DE MARCAS ========== */
   .faixa-marcas{
     padding: 30px 0;
-    background: var(--tinta);
+    background: var(--branco);
     overflow:hidden;
   }
   /* Logos em bolinhas, rolando continuamente para a esquerda (a lista é duplicada no JS para o loop ficar contínuo) */
@@ -386,6 +398,7 @@
     height: 110px;
     border-radius: 50%;
     background: var(--branco);
+    border: 1.5px solid var(--borda);
     display:flex;
     align-items:center;
     justify-content:center;
@@ -759,7 +772,6 @@
     .hero .acoes, .hero-extra{ justify-content:center; }
     .hero p.subtitulo{ margin-left:auto; margin-right:auto; }
     .sobre .container{ grid-template-columns: 1fr; }
-    .grade-fotos-sobre{ max-width: 420px; margin: 0 auto; }
     .item-portfolio, .card-servico{ flex-basis: calc((100% - 24px) / 2); }
     .contato .container{ grid-template-columns: 1fr; }
   }
@@ -830,15 +842,14 @@
           <p class="contato-rapido" id="contatoRapidoHero"></p>
         </div>
       </div>
-      <!-- Espaço para as duas fotos da dupla na capa, tamanho médio, lado a lado.
-           Para usar fotos reais, troque cada div .foto-capa por, por exemplo:
-           <img src="foto-guilherme.jpg" alt="Guilherme, criador de conteúdo UGC">
-           <img src="foto-viviane.jpg" alt="Viviane, criadora de conteúdo UGC"> -->
+      <!-- As duas fotos da dupla na capa. Para trocar por outra foto, basta apontar o src para outro arquivo em assets/fotos/. -->
       <div class="capa-fotos fade-up">
-        <div class="foto-capa foto-capa-1" style="background: linear-gradient(150deg, #1b1b1b, #4a4a4a 55%, #d46928);">
+        <div class="foto-capa foto-capa-1">
+          <img src="assets/fotos/guilherme-pedal.jpg" alt="Guilherme pedalando com a equipe Pedal Bagual">
           <span class="legenda-foto">Guilherme</span>
         </div>
-        <div class="foto-capa foto-capa-2" style="background: linear-gradient(135deg, #d46928, #f2a65a);">
+        <div class="foto-capa foto-capa-2">
+          <img src="assets/fotos/viviane-corrida.jpg" alt="Viviane correndo na Corrida Mãe Aparecida">
           <span class="legenda-foto">Viviane</span>
         </div>
       </div>
@@ -856,25 +867,24 @@
   <!-- ===================== SOBRE ===================== -->
   <section class="sobre" id="sobre">
     <div class="container">
-      <!-- Grade com vários espaços de foto em estilo polaroid, cada uma levemente torta.
-           Para usar fotos reais, troque cada div .polaroid-foto por, por exemplo:
-           <img src="foto-viviane-sobre.jpg" alt="Viviane sorrindo, gravando conteúdo UGC"> -->
+      <!-- Grade com fotos reais em estilo polaroid, cada uma levemente torta.
+           Para trocar alguma foto, basta apontar o src para outro arquivo em assets/fotos/. -->
       <div class="grade-fotos-sobre">
         <div class="polaroid fade-up">
-          <div class="polaroid-foto" style="background: linear-gradient(150deg, #d46928, #e9f5c9);"></div>
+          <div class="polaroid-foto"><img src="assets/fotos/viviane-selfie.jpg" alt="Viviane sorrindo"></div>
           <span class="polaroid-legenda">Viviane</span>
         </div>
         <div class="polaroid fade-up">
-          <div class="polaroid-foto" style="background: linear-gradient(150deg, #1b1b1b, #4a4a4a 60%, #d46928);"></div>
+          <div class="polaroid-foto"><img src="assets/fotos/guilherme-jiujitsu.jpeg" alt="Guilherme de faixa roxa no jiu-jitsu"></div>
           <span class="polaroid-legenda">Guilherme</span>
         </div>
         <div class="polaroid fade-up">
-          <div class="polaroid-foto" style="background: linear-gradient(150deg, #b9d97a, #d46928);"></div>
-          <span class="polaroid-legenda">Bastidores</span>
+          <div class="polaroid-foto"><img src="assets/fotos/viviane-skincare.jpg" alt="Viviane em momento de autocuidado"></div>
+          <span class="polaroid-legenda">Viviane</span>
         </div>
         <div class="polaroid fade-up">
-          <div class="polaroid-foto" style="background: linear-gradient(160deg, #e9f5c9, #f2a65a);"></div>
-          <span class="polaroid-legenda">Gravação</span>
+          <div class="polaroid-foto"><img src="assets/fotos/guilherme-viagem.jpg" alt="Guilherme em viagem, perto de uma represa"></div>
+          <span class="polaroid-legenda">Guilherme</span>
         </div>
       </div>
       <div class="fade-up">
@@ -1026,7 +1036,7 @@ const CONFIG = {
 
   // EDITE AQUI: textos da seção inicial (hero)
   hero: {
-    titulo: "Conteúdo autêntico que faz a sua marca vender mais",
+    titulo: "Criando conteúdo que converte",
     subtitulo: "Somos a Viviane & Guilherme, dupla de criadores de conteúdo UGC. Transformamos seu produto em vídeos e fotos que conectam com o público e performam em campanhas.",
     textoBotao: "Fale comigo"
   },
