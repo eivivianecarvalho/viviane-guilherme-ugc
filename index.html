@@ -243,7 +243,13 @@
     position:relative;
     overflow:hidden;
   }
-  .hero .bloco-imagem{ aspect-ratio: 4/5; }
+  /* Fileira com as duas fotos da dupla (uma de cada criador) */
+  .fotos-duo{
+    display:flex;
+    gap: 16px;
+  }
+  .fotos-duo .bloco-imagem{ flex: 1; min-width: 0; }
+  .hero .fotos-duo .bloco-imagem{ aspect-ratio: 3/4; }
   .bloco-imagem::after{
     content: attr(data-legenda);
     position:absolute;
@@ -293,7 +299,7 @@
     gap: 56px;
     align-items:center;
   }
-  .sobre .bloco-imagem{ aspect-ratio: 1/1; }
+  .sobre .fotos-duo .bloco-imagem{ aspect-ratio: 1/1; }
   .sobre h2{ font-size: clamp(1.7rem, 3vw, 2.3rem); }
 
   /* ========== PORTFÓLIO ========== */
@@ -549,9 +555,10 @@
   /* ========== RESPONSIVO ========== */
   @media (max-width: 980px){
     .hero .container{ grid-template-columns: 1fr; }
-    .hero .bloco-imagem{ aspect-ratio: 16/10; order:-1; }
+    .hero .fotos-duo{ order:-1; }
+    .hero .fotos-duo .bloco-imagem{ aspect-ratio: 4/5; }
     .sobre .container{ grid-template-columns: 1fr; }
-    .sobre .bloco-imagem{ aspect-ratio: 16/9; }
+    .sobre .fotos-duo .bloco-imagem{ aspect-ratio: 1/1; }
     .grade-portfolio{ grid-template-columns: repeat(2, 1fr); }
     .grade-servicos{ grid-template-columns: repeat(2, 1fr); }
     .grade-numeros{ grid-template-columns: repeat(2, 1fr); }
@@ -575,6 +582,8 @@
     .grade-portfolio{ grid-template-columns: 1fr; }
     .hero .acoes{ flex-direction:column; align-items:stretch; }
     .hero .acoes .botao{ width:100%; }
+    .fotos-duo{ flex-direction: column; }
+    .hero .fotos-duo .bloco-imagem, .sobre .fotos-duo .bloco-imagem{ aspect-ratio: 16/10; }
   }
 </style>
 </head>
@@ -611,8 +620,14 @@
           <a href="#portfolio" class="botao botao-secundario">Ver portfólio</a>
         </div>
       </div>
-      <!-- Bloco em gradiente no lugar da foto principal do casal de criadores. Para usar uma foto real, troque a div .bloco-imagem por <img src="sua-foto.jpg" alt="Viviane e Guilherme, criadores de conteúdo UGC"> -->
-      <div class="bloco-imagem fade-up" data-legenda="Viviane & Guilherme" style="background: linear-gradient(135deg, #d46928, #f2a65a 55%, #e9f5c9);"></div>
+      <!-- Blocos em gradiente no lugar das fotos individuais da dupla na capa.
+           Para usar fotos reais, troque cada div .bloco-imagem por, por exemplo:
+           <img src="foto-viviane.jpg" alt="Viviane, criadora de conteúdo UGC">
+           <img src="foto-guilherme.jpg" alt="Guilherme, criador de conteúdo UGC"> -->
+      <div class="fotos-duo">
+        <div class="bloco-imagem fade-up" data-legenda="Viviane" style="background: linear-gradient(135deg, #d46928, #f2a65a);"></div>
+        <div class="bloco-imagem fade-up" data-legenda="Guilherme" style="background: linear-gradient(150deg, #1b1b1b, #4a4a4a 55%, #d46928);"></div>
+      </div>
     </div>
   </section>
 
@@ -625,8 +640,14 @@
   <!-- ===================== SOBRE ===================== -->
   <section class="sobre" id="sobre">
     <div class="container">
-      <!-- Bloco em gradiente no lugar da foto de apresentação. Para trocar por foto real, substitua a div .bloco-imagem por <img src="foto-sobre.jpg" alt="Viviane e Guilherme sorrindo, gravando conteúdo UGC"> -->
-      <div class="bloco-imagem fade-up" data-legenda="Nos bastidores" style="background: linear-gradient(150deg, #1b1b1b, #4a4a4a 60%, #d46928); aspect-ratio:1/1;"></div>
+      <!-- Blocos em gradiente no lugar das fotos individuais na seção "Quem somos".
+           Para usar fotos reais, troque cada div .bloco-imagem por, por exemplo:
+           <img src="foto-viviane-sobre.jpg" alt="Viviane sorrindo, gravando conteúdo UGC">
+           <img src="foto-guilherme-sobre.jpg" alt="Guilherme sorrindo, gravando conteúdo UGC"> -->
+      <div class="fotos-duo">
+        <div class="bloco-imagem fade-up" data-legenda="Viviane" style="background: linear-gradient(150deg, #d46928, #e9f5c9);"></div>
+        <div class="bloco-imagem fade-up" data-legenda="Guilherme" style="background: linear-gradient(150deg, #1b1b1b, #4a4a4a 60%, #d46928);"></div>
+      </div>
       <div class="fade-up">
         <span class="kicker" style="display:inline-block;font-family:var(--fonte-titulo);font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--laranja);background:var(--verde-limao);padding:6px 16px;border-radius:999px;margin-bottom:16px;">Quem somos</span>
         <h2 id="sobreTitulo"></h2>
