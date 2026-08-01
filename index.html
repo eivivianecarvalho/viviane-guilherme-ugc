@@ -1289,9 +1289,13 @@ const CONFIG = {
 
     let blocoMidia;
     if(item.video){
+      // Parâmetros que reduzem a marca do YouTube no player: modestbranding tira o logo grande,
+      // rel=0 evita sugestão de vídeos de outros canais, iv_load_policy=3 esconde anotações.
+      // O clique direito fica desativado no vídeo pra dificultar um pouco copiar o link ou baixar.
+      const parametrosVideo = 'modestbranding=1&rel=0&iv_load_policy=3&playsinline=1';
       blocoMidia =
-        '<div class="video-portfolio">' +
-          '<iframe src="https://www.youtube-nocookie.com/embed/' + item.video + '" title="' + item.titulo + '" ' +
+        '<div class="video-portfolio" oncontextmenu="return false;">' +
+          '<iframe src="https://www.youtube-nocookie.com/embed/' + item.video + '?' + parametrosVideo + '" title="' + item.titulo + '" ' +
           'loading="lazy" referrerpolicy="strict-origin-when-cross-origin" ' +
           'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' +
         '</div>';
