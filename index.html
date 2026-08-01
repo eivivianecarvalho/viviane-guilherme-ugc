@@ -659,43 +659,9 @@
 
   /* ========== CONTATO ========== */
   .contato .container{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 56px;
-  }
-  .formulario{
     display:flex;
-    flex-direction:column;
-    gap: 16px;
+    justify-content:center;
   }
-  .campo{ display:flex; flex-direction:column; gap:6px; }
-  .campo label{
-    font-family: var(--fonte-titulo);
-    font-weight:600;
-    font-size: .9rem;
-  }
-  .campo input, .campo textarea{
-    font-family: var(--fonte-corpo);
-    font-size: 1rem;
-    padding: 14px 16px;
-    border-radius: 12px;
-    border: 1.5px solid var(--borda);
-    background: var(--branco);
-    color: var(--tinta);
-    resize: vertical;
-  }
-  .campo input:focus, .campo textarea:focus{ border-color: var(--laranja); }
-  .mensagem-confirmacao{
-    display:none;
-    background: var(--verde-limao);
-    color: var(--tinta);
-    padding: 14px 18px;
-    border-radius: 12px;
-    font-weight:600;
-    font-size: .95rem;
-  }
-  .mensagem-confirmacao.visivel{ display:block; }
-
   .contato-direto{
     background: var(--tinta);
     border-radius: var(--raio);
@@ -705,6 +671,8 @@
     flex-direction:column;
     justify-content:center;
     gap: 18px;
+    max-width: 480px;
+    width:100%;
   }
   .contato-direto h3{ color: var(--branco); font-size: 1.3rem; }
   .contato-direto p{ color: #cfcfcf; }
@@ -773,7 +741,6 @@
     .hero p.subtitulo{ margin-left:auto; margin-right:auto; }
     .sobre .container{ grid-template-columns: 1fr; }
     .item-portfolio, .card-servico{ flex-basis: calc((100% - 24px) / 2); }
-    .contato .container{ grid-template-columns: 1fr; }
   }
 
   @media (max-width: 760px){
@@ -958,29 +925,6 @@
   <!-- ===================== CONTATO ===================== -->
   <section class="contato" id="contato" style="background:#fbf9f4;">
     <div class="container">
-      <div class="fade-up">
-        <span class="kicker">Contato</span>
-        <h2 style="font-size:clamp(1.7rem, 3vw, 2.3rem);">Vamos criar o próximo conteúdo de sucesso da sua marca</h2>
-        <p style="margin-bottom:24px;">Preencha o formulário ou fale direto com a gente pelos canais abaixo. Respondemos rápido.</p>
-
-        <form class="formulario" id="formularioContato" novalidate>
-          <div class="campo">
-            <label for="campoNome">Nome</label>
-            <input type="text" id="campoNome" name="nome" autocomplete="name" required>
-          </div>
-          <div class="campo">
-            <label for="campoEmail">E-mail</label>
-            <input type="email" id="campoEmail" name="email" autocomplete="email" required>
-          </div>
-          <div class="campo">
-            <label for="campoMensagem">Mensagem</label>
-            <textarea id="campoMensagem" name="mensagem" rows="5" required></textarea>
-          </div>
-          <button type="submit" class="botao botao-primario">Enviar mensagem</button>
-          <p class="mensagem-confirmacao" id="mensagemConfirmacao" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-
       <div class="contato-direto fade-up">
         <h3>Prefere falar direto?</h3>
         <p>Escolha o canal que preferir. Estamos disponíveis para orçamentos, parcerias e dúvidas.</p>
@@ -1021,6 +965,7 @@ const CONFIG = {
     whatsappNumero: "5512981172902", // número com código do país (55) e DDD, usado no link do WhatsApp
     instagramUsuario: "@byvivianecarvalho",
     instagramLink: "https://www.instagram.com/byvivianecarvalho",
+    portfolioLink: "https://byvivianecarvalho.com/#contato",
     anoFundacao: 2026
   },
 
@@ -1130,13 +1075,6 @@ const CONFIG = {
     { fala: "Usamos os vídeos direto nos anúncios e o custo por resultado caiu bastante. Já fechamos uma nova parceria para o próximo lançamento.", nome: "Juliana Prado", empresa: "NutriVida" },
     { fala: "Gostei muito da naturalidade da dupla nas gravações. O conteúdo não parece publicidade forçada, e isso fez toda a diferença no engajamento.", nome: "Marcos Vieira", empresa: "Trilha Urbana" }
   ],
-
-  // EDITE AQUI: textos do formulário de contato
-  contato: {
-    tituloBotoesDiretos: "Prefere falar direto?",
-    mensagemSucesso: "Recebemos os seus dados. O seu aplicativo de e-mail deve abrir agora com a mensagem pronta para envio.",
-    assuntoEmail: "Proposta de parceria com Viviane & Guilherme"
-  },
 
   // EDITE AQUI: links do rodapé
   redesSociais: [
@@ -1396,7 +1334,8 @@ const CONFIG = {
   const canaisContato = [
     { simbolo: "💬", rotulo: "WhatsApp: " + CONFIG.geral.telefoneFormatado, link: "https://wa.me/" + CONFIG.geral.whatsappNumero },
     { simbolo: "✉️", rotulo: "E-mail: " + CONFIG.geral.email, link: "mailto:" + CONFIG.geral.email },
-    { simbolo: "📷", rotulo: "Instagram: " + CONFIG.geral.instagramUsuario, link: CONFIG.geral.instagramLink }
+    { simbolo: "📷", rotulo: "Instagram: " + CONFIG.geral.instagramUsuario, link: CONFIG.geral.instagramLink },
+    { simbolo: "🔗", rotulo: "Fale comigo pelo meu portfólio", link: CONFIG.geral.portfolioLink }
   ];
   canaisContato.forEach(function(canal){
     const a = document.createElement("a");
@@ -1407,34 +1346,6 @@ const CONFIG = {
     const li = document.createElement("li");
     li.appendChild(a);
     listaContatoDireto.appendChild(li);
-  });
-
-  // ---------- Formulário de contato (mailto + confirmação na tela) ----------
-  const formularioContato = document.getElementById("formularioContato");
-  const mensagemConfirmacao = document.getElementById("mensagemConfirmacao");
-
-  formularioContato.addEventListener("submit", function(evento){
-    evento.preventDefault();
-
-    const nome = document.getElementById("campoNome").value.trim();
-    const email = document.getElementById("campoEmail").value.trim();
-    const mensagem = document.getElementById("campoMensagem").value.trim();
-
-    const corpoEmail =
-      "Nome: " + nome + "\n" +
-      "E-mail: " + email + "\n\n" +
-      "Mensagem:\n" + mensagem;
-
-    const linkMailto =
-      "mailto:" + CONFIG.geral.email +
-      "?subject=" + encodeURIComponent(CONFIG.contato.assuntoEmail) +
-      "&body=" + encodeURIComponent(corpoEmail);
-
-    window.location.href = linkMailto;
-
-    mensagemConfirmacao.textContent = CONFIG.contato.mensagemSucesso;
-    mensagemConfirmacao.classList.add("visivel");
-    formularioContato.reset();
   });
 
   // ---------- Rodapé ----------
