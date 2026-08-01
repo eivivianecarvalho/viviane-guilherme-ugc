@@ -1,0 +1,1128 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Viviane & Guilherme | Criadores de Conteúdo UGC</title>
+<meta name="description" content="Viviane & Guilherme, criadores de conteúdo UGC. Vídeos, reels, fotos de produto e unboxing para marcas que querem vender mais com conteúdo autêntico.">
+
+<!-- Fontes do Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&family=Fraunces:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+
+<style>
+  /* ========== VARIÁVEIS DE ESTILO (PALETA E FONTES) ========== */
+  :root{
+    --branco: #ffffff;
+    --laranja: #d46928;
+    --laranja-claro: #f2a65a;
+    --verde-limao: #e9f5c9;
+    --verde-limao-escuro: #b9d97a;
+    --tinta: #1b1b1b;
+    --tinta-suave: #4a4a4a;
+    --borda: #eee7da;
+    --fonte-titulo: 'Be Vietnam Pro', sans-serif;
+    --fonte-corpo: 'DM Sans', sans-serif;
+    --fonte-charme: 'Fraunces', serif;
+    --raio: 20px;
+    --sombra: 0 10px 30px rgba(27,27,27,0.08);
+  }
+
+  *,*::before,*::after{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--branco);
+    color: var(--tinta);
+    font-family: var(--fonte-corpo);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  img, svg{ max-width: 100%; display:block; }
+
+  h1,h2,h3,h4{
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0 0 .5em 0;
+    color: var(--tinta);
+  }
+
+  p{ margin: 0 0 1em 0; color: var(--tinta-suave); }
+
+  a{ color: inherit; text-decoration: none; }
+
+  em{
+    font-family: var(--fonte-charme);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--laranja);
+  }
+
+  .container{
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  section{ padding: 96px 0; }
+
+  .secao-titulo{
+    text-align:center;
+    max-width: 640px;
+    margin: 0 auto 56px auto;
+  }
+  .secao-titulo .kicker{
+    display:inline-block;
+    font-family: var(--fonte-titulo);
+    font-weight:600;
+    font-size: .8rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--laranja);
+    background: var(--verde-limao);
+    padding: 6px 16px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .secao-titulo h2{ font-size: clamp(1.7rem, 3.2vw, 2.5rem); }
+  .secao-titulo p{ font-size: 1.05rem; }
+
+  /* Foco visível para navegação por teclado (acessibilidade) */
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline: 3px solid var(--laranja);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .botao{
+    display: inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    font-family: var(--fonte-titulo);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 15px 32px;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+    white-space: nowrap;
+  }
+  .botao-primario{
+    background: var(--laranja);
+    color: var(--branco);
+    box-shadow: 0 8px 20px rgba(212,105,40,0.3);
+  }
+  .botao-primario:hover{ transform: translateY(-3px); box-shadow: 0 14px 26px rgba(212,105,40,0.38); }
+  .botao-secundario{
+    background: transparent;
+    color: var(--tinta);
+    border-color: var(--tinta);
+  }
+  .botao-secundario:hover{ background: var(--tinta); color: var(--branco); transform: translateY(-3px); }
+
+  /* ========== CABEÇALHO / MENU ========== */
+  .cabecalho{
+    position: fixed;
+    top:0; left:0; right:0;
+    z-index: 1000;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--borda);
+  }
+  .cabecalho .container{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height: 80px;
+  }
+  .logo{
+    font-family: var(--fonte-titulo);
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--tinta);
+    letter-spacing: -.01em;
+  }
+  .logo em{ color: var(--laranja); }
+
+  .menu-desktop{
+    display:flex;
+    align-items:center;
+    gap: 8px;
+    list-style:none;
+    margin:0; padding:0;
+  }
+  .menu-desktop a{
+    display:inline-block;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: .95rem;
+    color: var(--tinta-suave);
+    transition: background .2s ease, color .2s ease;
+  }
+  .menu-desktop a:hover{ background: var(--verde-limao); color: var(--tinta); }
+  .menu-desktop .botao{ margin-left: 8px; padding: 10px 24px; font-size: .95rem; }
+
+  .botao-hamburguer{
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    gap:5px;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    cursor:pointer;
+  }
+  .botao-hamburguer span{
+    display:block;
+    width: 22px;
+    height: 2px;
+    background: var(--tinta);
+    margin: 0 auto;
+    transition: transform .25s ease, opacity .25s ease;
+  }
+  .botao-hamburguer[aria-expanded="true"] span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+  .botao-hamburguer[aria-expanded="true"] span:nth-child(2){ opacity: 0; }
+  .botao-hamburguer[aria-expanded="true"] span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+
+  .menu-mobile{
+    display:none;
+    position: fixed;
+    top: 80px; left:0; right:0; bottom:0;
+    background: var(--branco);
+    padding: 24px;
+    overflow-y:auto;
+  }
+  .menu-mobile.aberto{ display:block; }
+  .menu-mobile ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px; }
+  .menu-mobile a{
+    display:block;
+    padding: 16px 8px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    font-family: var(--fonte-titulo);
+    border-bottom: 1px solid var(--borda);
+    color: var(--tinta);
+  }
+  .menu-mobile .botao{ width:100%; margin-top: 20px; }
+
+  /* ========== HERO ========== */
+  .hero{
+    padding-top: 160px;
+    padding-bottom: 96px;
+  }
+  .hero .container{
+    display:grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 56px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    letter-spacing: -.02em;
+  }
+  .hero p.subtitulo{
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    max-width: 520px;
+  }
+  .hero .acoes{ display:flex; gap:16px; flex-wrap:wrap; margin-top: 12px; }
+  .bloco-imagem{
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .bloco-imagem{ aspect-ratio: 4/5; }
+  .bloco-imagem::after{
+    content: attr(data-legenda);
+    position:absolute;
+    bottom:0; left:0; right:0;
+    padding: 18px 20px;
+    font-family: var(--fonte-titulo);
+    font-weight:600;
+    font-size: .85rem;
+    color: var(--branco);
+    background: linear-gradient(0deg, rgba(0,0,0,0.35), transparent);
+  }
+
+  /* ========== FAIXA DE MARCAS ========== */
+  .faixa-marcas{
+    padding: 40px 0;
+    background: var(--tinta);
+    overflow:hidden;
+  }
+  .faixa-marcas .rotulo{
+    text-align:center;
+    color: #cfcfcf;
+    font-family: var(--fonte-titulo);
+    font-size: .8rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .marcas-trilho{
+    display:flex;
+    gap: 56px;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+  }
+  .marcas-trilho span{
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #f4efe4;
+    opacity: .85;
+  }
+
+  /* ========== SOBRE ========== */
+  .sobre .container{
+    display:grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap: 56px;
+    align-items:center;
+  }
+  .sobre .bloco-imagem{ aspect-ratio: 1/1; }
+  .sobre h2{ font-size: clamp(1.7rem, 3vw, 2.3rem); }
+
+  /* ========== PORTFÓLIO ========== */
+  .filtros{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-bottom: 40px;
+  }
+  .filtro-botao{
+    font-family: var(--fonte-titulo);
+    font-weight:600;
+    font-size: .9rem;
+    padding: 10px 20px;
+    border-radius: 999px;
+    border: 1.5px solid var(--borda);
+    background: var(--branco);
+    color: var(--tinta-suave);
+    cursor:pointer;
+    transition: all .2s ease;
+  }
+  .filtro-botao:hover{ border-color: var(--laranja); color: var(--laranja); }
+  .filtro-botao.ativo{ background: var(--laranja); border-color: var(--laranja); color: var(--branco); }
+
+  .grade-portfolio{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .item-portfolio{
+    border-radius: var(--raio);
+    overflow:hidden;
+    box-shadow: var(--sombra);
+    aspect-ratio: 3/4;
+    position:relative;
+    transition: transform .35s ease, opacity .35s ease;
+  }
+  .item-portfolio:hover{ transform: translateY(-6px); }
+  .item-portfolio.escondido{
+    display:none;
+  }
+  .item-portfolio .info{
+    position:absolute;
+    left:0; right:0; bottom:0;
+    padding: 20px;
+    background: linear-gradient(0deg, rgba(0,0,0,0.55), transparent);
+  }
+  .item-portfolio .info span{
+    display:inline-block;
+    font-family: var(--fonte-titulo);
+    font-size: .7rem;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color: var(--tinta);
+    background: var(--verde-limao);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+  }
+  .item-portfolio .info h3{
+    color: var(--branco);
+    font-size: 1.05rem;
+    margin:0;
+  }
+
+  /* ========== SERVIÇOS ========== */
+  .grade-servicos{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .card-servico{
+    background: var(--branco);
+    border: 1.5px solid var(--borda);
+    border-radius: var(--raio);
+    padding: 32px;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .card-servico:hover{ transform: translateY(-6px); box-shadow: var(--sombra); border-color: var(--laranja-claro); }
+  .card-servico .icone{
+    width: 56px; height:56px;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 1.6rem;
+    background: var(--verde-limao);
+    border-radius: 16px;
+    margin-bottom: 20px;
+  }
+  .card-servico h3{ font-size: 1.15rem; }
+  .card-servico p{ font-size: .95rem; margin-bottom:0; }
+
+  /* ========== NÚMEROS ========== */
+  .numeros{
+    background: var(--verde-limao);
+  }
+  .grade-numeros{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    text-align:center;
+  }
+  .item-numero .valor{
+    font-family: var(--fonte-titulo);
+    font-weight: 800;
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    color: var(--laranja);
+    letter-spacing: -.02em;
+  }
+  .item-numero .rotulo{
+    font-weight: 600;
+    color: var(--tinta);
+    font-size: .95rem;
+  }
+
+  /* ========== DEPOIMENTOS ========== */
+  .grade-depoimentos{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .card-depoimento{
+    background: var(--branco);
+    border-radius: var(--raio);
+    padding: 32px;
+    box-shadow: var(--sombra);
+    position:relative;
+  }
+  .card-depoimento .aspas{
+    font-family: var(--fonte-charme);
+    font-style: italic;
+    font-size: 3rem;
+    color: var(--verde-limao-escuro);
+    line-height: .5;
+    display:block;
+    margin-bottom: 16px;
+  }
+  .card-depoimento p.fala{ color: var(--tinta); font-size: 1.02rem; }
+  .autor{ display:flex; align-items:center; gap:12px; margin-top: 16px; }
+  .autor .avatar{
+    width: 44px; height:44px; border-radius:50%;
+    flex-shrink:0;
+  }
+  .autor .nome{ font-weight:700; font-family: var(--fonte-titulo); font-size: .95rem; color: var(--tinta); }
+  .autor .empresa{ font-size: .85rem; color: var(--tinta-suave); }
+
+  /* ========== CONTATO ========== */
+  .contato .container{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+  }
+  .formulario{
+    display:flex;
+    flex-direction:column;
+    gap: 16px;
+  }
+  .campo{ display:flex; flex-direction:column; gap:6px; }
+  .campo label{
+    font-family: var(--fonte-titulo);
+    font-weight:600;
+    font-size: .9rem;
+  }
+  .campo input, .campo textarea{
+    font-family: var(--fonte-corpo);
+    font-size: 1rem;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1.5px solid var(--borda);
+    background: var(--branco);
+    color: var(--tinta);
+    resize: vertical;
+  }
+  .campo input:focus, .campo textarea:focus{ border-color: var(--laranja); }
+  .mensagem-confirmacao{
+    display:none;
+    background: var(--verde-limao);
+    color: var(--tinta);
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-weight:600;
+    font-size: .95rem;
+  }
+  .mensagem-confirmacao.visivel{ display:block; }
+
+  .contato-direto{
+    background: var(--tinta);
+    border-radius: var(--raio);
+    padding: 40px;
+    color: var(--branco);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap: 18px;
+  }
+  .contato-direto h3{ color: var(--branco); font-size: 1.3rem; }
+  .contato-direto p{ color: #cfcfcf; }
+  .lista-contato{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap: 12px; }
+  .lista-contato a{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+    font-weight:600;
+    transition: background .2s ease;
+  }
+  .lista-contato a:hover{ background: var(--laranja); }
+  .lista-contato .simbolo{ font-size: 1.2rem; }
+
+  /* ========== RODAPÉ ========== */
+  .rodape{
+    background: var(--tinta);
+    color: #cfcfcf;
+    padding: 48px 0 28px 0;
+  }
+  .rodape .container{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap: 20px;
+    text-align:center;
+  }
+  .rodape .logo{ color: var(--branco); }
+  .rodape .redes{ display:flex; gap: 16px; list-style:none; margin:0; padding:0; }
+  .rodape .redes a{
+    width: 42px; height:42px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: background .2s ease, border-color .2s ease;
+  }
+  .rodape .redes a:hover{ background: var(--laranja); border-color: var(--laranja); }
+  .rodape .copyright{ font-size: .85rem; color: #9a9a9a; }
+
+  /* ========== ANIMAÇÃO DE ENTRADA (fade + subida) ========== */
+  .fade-up{
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .fade-up.visivel{
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .fade-up{ opacity:1; transform:none; transition:none; }
+    html{ scroll-behavior:auto; }
+  }
+
+  /* ========== RESPONSIVO ========== */
+  @media (max-width: 980px){
+    .hero .container{ grid-template-columns: 1fr; }
+    .hero .bloco-imagem{ aspect-ratio: 16/10; order:-1; }
+    .sobre .container{ grid-template-columns: 1fr; }
+    .sobre .bloco-imagem{ aspect-ratio: 16/9; }
+    .grade-portfolio{ grid-template-columns: repeat(2, 1fr); }
+    .grade-servicos{ grid-template-columns: repeat(2, 1fr); }
+    .grade-numeros{ grid-template-columns: repeat(2, 1fr); }
+    .grade-depoimentos{ grid-template-columns: 1fr; }
+    .contato .container{ grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 760px){
+    .menu-desktop{ display:none; }
+    .botao-hamburguer{ display:flex; }
+    section{ padding: 64px 0; }
+    .grade-portfolio{ grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .grade-servicos{ grid-template-columns: 1fr; }
+    .grade-numeros{ grid-template-columns: repeat(2, 1fr); gap: 28px 16px; }
+    .hero{ padding-top: 120px; }
+    .contato-direto{ padding: 28px; }
+  }
+
+  @media (max-width: 480px){
+    .container{ padding: 0 18px; }
+    .grade-portfolio{ grid-template-columns: 1fr; }
+    .hero .acoes{ flex-direction:column; align-items:stretch; }
+    .hero .acoes .botao{ width:100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== CABEÇALHO / MENU ===================== -->
+<header class="cabecalho">
+  <div class="container">
+    <a href="#inicio" class="logo" id="logoTexto"></a>
+
+    <nav aria-label="Navegação principal">
+      <ul class="menu-desktop" id="menuDesktop"></ul>
+    </nav>
+
+    <button class="botao-hamburguer" id="botaoHamburguer" aria-label="Abrir menu" aria-expanded="false" aria-controls="menuMobile">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="menu-mobile" id="menuMobile">
+    <ul id="menuMobileLista"></ul>
+  </div>
+</header>
+
+<main>
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="inicio">
+    <div class="container">
+      <div class="texto-hero fade-up">
+        <h1 id="heroTitulo"></h1>
+        <p class="subtitulo" id="heroSubtitulo"></p>
+        <div class="acoes">
+          <a href="#contato" class="botao botao-primario" id="heroCta"></a>
+          <a href="#portfolio" class="botao botao-secundario">Ver portfólio</a>
+        </div>
+      </div>
+      <!-- Bloco em gradiente no lugar da foto principal do casal de criadores. Para usar uma foto real, troque a div .bloco-imagem por <img src="sua-foto.jpg" alt="Viviane e Guilherme, criadores de conteúdo UGC"> -->
+      <div class="bloco-imagem fade-up" data-legenda="Viviane & Guilherme" style="background: linear-gradient(135deg, #d46928, #f2a65a 55%, #e9f5c9);"></div>
+    </div>
+  </section>
+
+  <!-- ===================== FAIXA DE MARCAS ===================== -->
+  <section class="faixa-marcas" aria-label="Marcas parceiras">
+    <p class="rotulo fade-up">Marcas que já confiaram no nosso conteúdo</p>
+    <div class="marcas-trilho fade-up" id="listaMarcas"></div>
+  </section>
+
+  <!-- ===================== SOBRE ===================== -->
+  <section class="sobre" id="sobre">
+    <div class="container">
+      <!-- Bloco em gradiente no lugar da foto de apresentação. Para trocar por foto real, substitua a div .bloco-imagem por <img src="foto-sobre.jpg" alt="Viviane e Guilherme sorrindo, gravando conteúdo UGC"> -->
+      <div class="bloco-imagem fade-up" data-legenda="Nos bastidores" style="background: linear-gradient(150deg, #1b1b1b, #4a4a4a 60%, #d46928); aspect-ratio:1/1;"></div>
+      <div class="fade-up">
+        <span class="kicker" style="display:inline-block;font-family:var(--fonte-titulo);font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--laranja);background:var(--verde-limao);padding:6px 16px;border-radius:999px;margin-bottom:16px;">Quem somos</span>
+        <h2 id="sobreTitulo"></h2>
+        <p id="sobreTexto"></p>
+        <a href="#contato" class="botao botao-primario">Vamos conversar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PORTFÓLIO ===================== -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <div class="secao-titulo fade-up">
+        <span class="kicker">Portfólio</span>
+        <h2>Conteúdo que já rodou pelas redes</h2>
+        <p>Uma seleção de entregas por nicho. Filtre pela categoria que mais combina com a sua marca.</p>
+      </div>
+
+      <div class="filtros fade-up" id="filtrosPortfolio" role="group" aria-label="Filtrar portfólio por categoria"></div>
+
+      <div class="grade-portfolio" id="gradePortfolio"></div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVIÇOS ===================== -->
+  <section class="servicos" id="servicos" style="background: #fbf9f4;">
+    <div class="container">
+      <div class="secao-titulo fade-up">
+        <span class="kicker">Serviços</span>
+        <h2>O que a gente entrega para a sua marca</h2>
+        <p>Conteúdo autêntico, pensado para performar em anúncios e redes sociais.</p>
+      </div>
+      <div class="grade-servicos" id="gradeServicos"></div>
+    </div>
+  </section>
+
+  <!-- ===================== NÚMEROS / RESULTADOS ===================== -->
+  <section class="numeros" id="resultados">
+    <div class="container">
+      <div class="secao-titulo fade-up">
+        <span class="kicker">Resultados</span>
+        <h2>Números que mostram o nosso trabalho</h2>
+      </div>
+      <div class="grade-numeros" id="gradeNumeros"></div>
+    </div>
+  </section>
+
+  <!-- ===================== DEPOIMENTOS ===================== -->
+  <section class="depoimentos" id="depoimentos">
+    <div class="container">
+      <div class="secao-titulo fade-up">
+        <span class="kicker">Depoimentos</span>
+        <h2>O que as marcas dizem sobre a gente</h2>
+      </div>
+      <div class="grade-depoimentos" id="gradeDepoimentos"></div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTATO ===================== -->
+  <section class="contato" id="contato" style="background:#fbf9f4;">
+    <div class="container">
+      <div class="fade-up">
+        <span class="kicker">Contato</span>
+        <h2 style="font-size:clamp(1.7rem, 3vw, 2.3rem);">Vamos criar o próximo conteúdo de sucesso da sua marca</h2>
+        <p style="margin-bottom:24px;">Preencha o formulário ou fale direto com a gente pelos canais abaixo. Respondemos rápido.</p>
+
+        <form class="formulario" id="formularioContato" novalidate>
+          <div class="campo">
+            <label for="campoNome">Nome</label>
+            <input type="text" id="campoNome" name="nome" autocomplete="name" required>
+          </div>
+          <div class="campo">
+            <label for="campoEmail">E-mail</label>
+            <input type="email" id="campoEmail" name="email" autocomplete="email" required>
+          </div>
+          <div class="campo">
+            <label for="campoMensagem">Mensagem</label>
+            <textarea id="campoMensagem" name="mensagem" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="botao botao-primario">Enviar mensagem</button>
+          <p class="mensagem-confirmacao" id="mensagemConfirmacao" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <div class="contato-direto fade-up">
+        <h3>Prefere falar direto?</h3>
+        <p>Escolha o canal que preferir. Estamos disponíveis para orçamentos, parcerias e dúvidas.</p>
+        <ul class="lista-contato" id="listaContatoDireto"></ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== RODAPÉ ===================== -->
+<footer class="rodape">
+  <div class="container">
+    <span class="logo" id="rodapeLogo"></span>
+    <ul class="redes" id="rodapeRedes"></ul>
+    <p class="copyright" id="rodapeCopyright"></p>
+  </div>
+</footer>
+
+<script>
+/* =========================================================================
+   CONFIGURAÇÃO GERAL DO SITE
+   Edite os valores abaixo para atualizar todo o conteúdo do site.
+   Não é necessário mexer no HTML nem no CSS para trocar textos, serviços,
+   depoimentos, números ou links de contato.
+   ========================================================================= */
+const CONFIG = {
+
+  // EDITE AQUI: dados gerais da marca / criadora(es)
+  geral: {
+    nome: "Viviane & Guilherme",
+    nomeCurto: "Vivi & Gui",
+    profissao: "Criadores de Conteúdo UGC",
+    email: "vivicarvalho.ugc@gmail.com",
+    telefone: "12981172902",
+    telefoneFormatado: "(12) 98117-2902",
+    whatsappNumero: "5512981172902", // número com código do país (55) e DDD, usado no link do WhatsApp
+    instagramUsuario: "@byvivianecarvalho",
+    instagramLink: "https://www.instagram.com/byvivianecarvalho",
+    anoFundacao: 2026
+  },
+
+  // EDITE AQUI: textos do menu de navegação (rótulo + id da seção correspondente)
+  menu: [
+    { rotulo: "Início", alvo: "#inicio" },
+    { rotulo: "Sobre", alvo: "#sobre" },
+    { rotulo: "Portfólio", alvo: "#portfolio" },
+    { rotulo: "Serviços", alvo: "#servicos" },
+    { rotulo: "Resultados", alvo: "#resultados" },
+    { rotulo: "Depoimentos", alvo: "#depoimentos" },
+    { rotulo: "Contato", alvo: "#contato" }
+  ],
+
+  // EDITE AQUI: textos da seção inicial (hero)
+  hero: {
+    titulo: "Conteúdo autêntico que faz a sua marca vender mais",
+    subtitulo: "Somos a Viviane & Guilherme, dupla de criadores de conteúdo UGC. Transformamos seu produto em vídeos e fotos que conectam com o público e performam em campanhas.",
+    textoBotao: "Fale comigo"
+  },
+
+  // EDITE AQUI: lista de marcas parceiras (aparecem na faixa escura abaixo do hero)
+  marcas: [
+    "Bella Cosmetics",
+    "NutriVida",
+    "Trilha Urbana",
+    "Sabor Caseiro",
+    "FitPro Suplementos",
+    "Viaja Fácil",
+    "Doce Lar Casa"
+  ],
+
+  // EDITE AQUI: texto da seção sobre
+  sobre: {
+    titulo: "A dupla por trás das câmeras",
+    texto: "Somos Viviane e Guilherme, apaixonados por contar histórias reais sobre produtos e experiências. Unimos naturalidade na frente das câmeras com estratégia de conteúdo, entregando vídeos e fotos que parecem indicação de amigo e não propaganda. Já ajudamos marcas de vários segmentos a aumentar o engajamento e a conversão em campanhas, sempre com entrega rápida, comunicação clara e respeito ao prazo combinado."
+  },
+
+  // EDITE AQUI: itens do portfólio. A categoria precisa bater com uma das categorias abaixo em "categoriasPortfolio"
+  portfolio: [
+    { titulo: "Rotina de skincare com sérum facial", categoria: "Beleza", gradiente: "linear-gradient(135deg, #d46928, #f2a65a)" },
+    { titulo: "Resenha de batom líquido matte", categoria: "Beleza", gradiente: "linear-gradient(150deg, #e9f5c9, #b9d97a)" },
+    { titulo: "Look de inverno com peças da coleção", categoria: "Moda", gradiente: "linear-gradient(135deg, #1b1b1b, #4a4a4a)" },
+    { titulo: "Try on de acessórios para o dia a dia", categoria: "Moda", gradiente: "linear-gradient(150deg, #d46928, #e9f5c9)" },
+    { titulo: "Receita rápida com tempero pronto", categoria: "Comida", gradiente: "linear-gradient(135deg, #f2a65a, #e9f5c9)" },
+    { titulo: "Unboxing de kit gourmet", categoria: "Comida", gradiente: "linear-gradient(150deg, #b9d97a, #d46928)" },
+    { titulo: "Treino em casa com suplemento pré-treino", categoria: "Fitness", gradiente: "linear-gradient(135deg, #1b1b1b, #d46928)" },
+    { titulo: "Resenha de roupa esportiva", categoria: "Fitness", gradiente: "linear-gradient(160deg, #e9f5c9, #f2a65a)" },
+    { titulo: "Vlog de check in em pousada", categoria: "Viagem", gradiente: "linear-gradient(135deg, #d46928, #4a4a4a)" },
+    { titulo: "Mala organizada com produtos de viagem", categoria: "Viagem", gradiente: "linear-gradient(150deg, #b9d97a, #e9f5c9)" }
+  ],
+
+  // EDITE AQUI: categorias usadas nos filtros do portfólio (a primeira, "Todos", é fixa)
+  categoriasPortfolio: ["Todos", "Beleza", "Moda", "Comida", "Fitness", "Viagem"],
+
+  // EDITE AQUI: serviços oferecidos
+  servicos: [
+    { icone: "🎬", titulo: "Vídeo UGC", descricao: "Vídeos naturais, gravados como se fossem feitos por um cliente real, prontos para uso em redes sociais e anúncios." },
+    { icone: "📱", titulo: "Reels para Redes Sociais", descricao: "Roteiro, gravação e edição de reels dinâmicos, pensados para reter atenção e gerar engajamento." },
+    { icone: "📦", titulo: "Fotos de Produto", descricao: "Ensaio fotográfico do seu produto em cenários que combinam com a identidade da sua marca." },
+    { icone: "🎁", titulo: "Unboxing e Review", descricao: "Abertura de produto com reação genuína e avaliação sincera, gerando confiança com o público." },
+    { icone: "📣", titulo: "Conteúdo para Anúncios", descricao: "Vídeos e fotos otimizados para performar como criativos pagos em Meta Ads e outras plataformas." },
+    { icone: "💬", titulo: "Depoimento em Vídeo", descricao: "Relato autêntico de experiência com o produto ou serviço, reforçando prova social para a sua marca." }
+  ],
+
+  // EDITE AQUI: números de resultado (contadores animados). Use "decimais" para casas decimais quando precisar
+  numeros: [
+    { valor: 85, sufixo: " mil", rotulo: "Seguidores engajados", decimais: 0 },
+    { valor: 12, sufixo: " milhões", rotulo: "Visualizações geradas", decimais: 0 },
+    { valor: 47, sufixo: "+", rotulo: "Marcas atendidas", decimais: 0 },
+    { valor: 8.5, sufixo: "%", rotulo: "Taxa de engajamento", decimais: 1 }
+  ],
+
+  // EDITE AQUI: depoimentos de clientes e marcas
+  depoimentos: [
+    { fala: "O conteúdo entregue pela Viviane e pelo Guilherme parecia indicação de amiga. Nossas vendas pela campanha aumentaram de forma visível logo na primeira semana.", nome: "Camila Duarte", empresa: "Bella Cosmetics" },
+    { fala: "Profissionalismo do início ao fim. O prazo foi cumprido, a comunicação foi clara e o material ficou acima do que esperávamos.", nome: "Rafael Nogueira", empresa: "FitPro Suplementos" },
+    { fala: "Usamos os vídeos direto nos anúncios e o custo por resultado caiu bastante. Já fechamos uma nova parceria para o próximo lançamento.", nome: "Juliana Prado", empresa: "NutriVida" },
+    { fala: "Gostei muito da naturalidade da dupla nas gravações. O conteúdo não parece publicidade forçada, e isso fez toda a diferença no engajamento.", nome: "Marcos Vieira", empresa: "Trilha Urbana" }
+  ],
+
+  // EDITE AQUI: textos do formulário de contato
+  contato: {
+    tituloBotoesDiretos: "Prefere falar direto?",
+    mensagemSucesso: "Recebemos os seus dados. O seu aplicativo de e-mail deve abrir agora com a mensagem pronta para envio.",
+    assuntoEmail: "Proposta de parceria com Viviane & Guilherme"
+  },
+
+  // EDITE AQUI: links do rodapé
+  redesSociais: [
+    { rotulo: "Instagram", simbolo: "IG", link: "https://www.instagram.com/byvivianecarvalho" },
+    { rotulo: "WhatsApp", simbolo: "WA", link: "https://wa.me/5512981172902" },
+    { rotulo: "E-mail", simbolo: "@", link: "mailto:vivicarvalho.ugc@gmail.com" }
+  ]
+};
+
+/* =========================================================================
+   RENDERIZAÇÃO DO CONTEÚDO A PARTIR DA CONFIGURAÇÃO ACIMA
+   A partir daqui é lógica do site. Normalmente não precisa editar nada
+   abaixo desta linha, só o objeto CONFIG lá em cima.
+   ========================================================================= */
+(function(){
+
+  // ---------- Cabeçalho / logo / menus ----------
+  document.getElementById("logoTexto").innerHTML = CONFIG.geral.nomeCurto.replace("&", "<em>&</em>");
+  document.getElementById("rodapeLogo").textContent = CONFIG.geral.nome;
+
+  const menuDesktop = document.getElementById("menuDesktop");
+  const menuMobileLista = document.getElementById("menuMobileLista");
+
+  CONFIG.menu.forEach(function(item){
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = item.alvo;
+    a.textContent = item.rotulo;
+    li.appendChild(a);
+    menuDesktop.appendChild(li);
+
+    const liMobile = document.createElement("li");
+    const aMobile = document.createElement("a");
+    aMobile.href = item.alvo;
+    aMobile.textContent = item.rotulo;
+    liMobile.appendChild(aMobile);
+    menuMobileLista.appendChild(liMobile);
+  });
+
+  const botaoCtaMenu = document.createElement("li");
+  botaoCtaMenu.innerHTML = '<a href="#contato" class="botao botao-primario">' + CONFIG.hero.textoBotao + '</a>';
+  menuDesktop.appendChild(botaoCtaMenu);
+
+  const botaoCtaMenuMobile = document.createElement("a");
+  botaoCtaMenuMobile.href = "#contato";
+  botaoCtaMenuMobile.className = "botao botao-primario";
+  botaoCtaMenuMobile.textContent = CONFIG.hero.textoBotao;
+  document.getElementById("menuMobile").appendChild(botaoCtaMenuMobile);
+
+  // ---------- Menu hambúrguer (mobile) ----------
+  const botaoHamburguer = document.getElementById("botaoHamburguer");
+  const menuMobile = document.getElementById("menuMobile");
+
+  function fecharMenuMobile(){
+    menuMobile.classList.remove("aberto");
+    botaoHamburguer.setAttribute("aria-expanded", "false");
+    botaoHamburguer.setAttribute("aria-label", "Abrir menu");
+  }
+  function alternarMenuMobile(){
+    const aberto = menuMobile.classList.toggle("aberto");
+    botaoHamburguer.setAttribute("aria-expanded", aberto ? "true" : "false");
+    botaoHamburguer.setAttribute("aria-label", aberto ? "Fechar menu" : "Abrir menu");
+  }
+  botaoHamburguer.addEventListener("click", alternarMenuMobile);
+
+  // Fecha o menu mobile ao clicar em qualquer link dele
+  menuMobile.querySelectorAll("a").forEach(function(link){
+    link.addEventListener("click", fecharMenuMobile);
+  });
+
+  // Fecha o menu mobile com a tecla Esc (acessibilidade / teclado)
+  document.addEventListener("keydown", function(evento){
+    if(evento.key === "Escape") fecharMenuMobile();
+  });
+
+  // ---------- Hero ----------
+  document.getElementById("heroTitulo").textContent = CONFIG.hero.titulo;
+  document.getElementById("heroSubtitulo").textContent = CONFIG.hero.subtitulo;
+  document.getElementById("heroCta").textContent = CONFIG.hero.textoBotao;
+
+  // ---------- Faixa de marcas ----------
+  const listaMarcas = document.getElementById("listaMarcas");
+  CONFIG.marcas.forEach(function(marca){
+    const span = document.createElement("span");
+    span.textContent = marca;
+    listaMarcas.appendChild(span);
+  });
+
+  // ---------- Sobre ----------
+  document.getElementById("sobreTitulo").textContent = CONFIG.sobre.titulo;
+  document.getElementById("sobreTexto").textContent = CONFIG.sobre.texto;
+
+  // ---------- Portfólio + filtros ----------
+  const filtrosPortfolio = document.getElementById("filtrosPortfolio");
+  const gradePortfolio = document.getElementById("gradePortfolio");
+
+  CONFIG.portfolio.forEach(function(item){
+    const div = document.createElement("div");
+    div.className = "item-portfolio fade-up";
+    div.setAttribute("data-categoria", item.categoria);
+    div.style.background = item.gradiente;
+    div.innerHTML = '<div class="info"><span>' + item.categoria + '</span><h3>' + item.titulo + '</h3></div>';
+    // Para usar uma foto real neste card, troque o style de background por:
+    // background-image: url('sua-foto.jpg'); background-size: cover; background-position: center;
+    gradePortfolio.appendChild(div);
+  });
+
+  CONFIG.categoriasPortfolio.forEach(function(categoria, indice){
+    const botao = document.createElement("button");
+    botao.type = "button";
+    botao.className = "filtro-botao" + (indice === 0 ? " ativo" : "");
+    botao.textContent = categoria;
+    botao.setAttribute("data-categoria", categoria);
+    botao.addEventListener("click", function(){
+      filtrosPortfolio.querySelectorAll(".filtro-botao").forEach(function(b){ b.classList.remove("ativo"); });
+      botao.classList.add("ativo");
+
+      gradePortfolio.querySelectorAll(".item-portfolio").forEach(function(cartao){
+        const categoriaCartao = cartao.getAttribute("data-categoria");
+        const mostrar = categoria === "Todos" || categoriaCartao === categoria;
+        cartao.classList.toggle("escondido", !mostrar);
+      });
+    });
+    filtrosPortfolio.appendChild(botao);
+  });
+
+  // ---------- Serviços ----------
+  const gradeServicos = document.getElementById("gradeServicos");
+  CONFIG.servicos.forEach(function(servico){
+    const div = document.createElement("div");
+    div.className = "card-servico fade-up";
+    div.innerHTML = '<div class="icone" aria-hidden="true">' + servico.icone + '</div><h3>' + servico.titulo + '</h3><p>' + servico.descricao + '</p>';
+    gradeServicos.appendChild(div);
+  });
+
+  // ---------- Números / contadores ----------
+  const gradeNumeros = document.getElementById("gradeNumeros");
+  CONFIG.numeros.forEach(function(item, indice){
+    const div = document.createElement("div");
+    div.className = "item-numero fade-up";
+    div.innerHTML = '<div class="valor" id="numero-' + indice + '">0</div><div class="rotulo">' + item.rotulo + '</div>';
+    gradeNumeros.appendChild(div);
+  });
+
+  // ---------- Depoimentos ----------
+  const gradeDepoimentos = document.getElementById("gradeDepoimentos");
+  const gradientesAvatar = [
+    "linear-gradient(135deg, #d46928, #f2a65a)",
+    "linear-gradient(135deg, #b9d97a, #e9f5c9)",
+    "linear-gradient(135deg, #1b1b1b, #4a4a4a)",
+    "linear-gradient(135deg, #f2a65a, #d46928)"
+  ];
+  CONFIG.depoimentos.forEach(function(item, indice){
+    const div = document.createElement("div");
+    div.className = "card-depoimento fade-up";
+    div.innerHTML =
+      '<span class="aspas" aria-hidden="true">&ldquo;</span>' +
+      '<p class="fala">' + item.fala + '</p>' +
+      '<div class="autor">' +
+        '<div class="avatar" style="background:' + gradientesAvatar[indice % gradientesAvatar.length] + ';" aria-hidden="true"></div>' +
+        '<div><div class="nome">' + item.nome + '</div><div class="empresa">' + item.empresa + '</div></div>' +
+      '</div>';
+    gradeDepoimentos.appendChild(div);
+  });
+
+  // ---------- Contato direto ----------
+  const listaContatoDireto = document.getElementById("listaContatoDireto");
+  const canaisContato = [
+    { simbolo: "💬", rotulo: "WhatsApp: " + CONFIG.geral.telefoneFormatado, link: "https://wa.me/" + CONFIG.geral.whatsappNumero },
+    { simbolo: "✉️", rotulo: "E-mail: " + CONFIG.geral.email, link: "mailto:" + CONFIG.geral.email },
+    { simbolo: "📷", rotulo: "Instagram: " + CONFIG.geral.instagramUsuario, link: CONFIG.geral.instagramLink }
+  ];
+  canaisContato.forEach(function(canal){
+    const a = document.createElement("a");
+    a.href = canal.link;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.innerHTML = '<span class="simbolo" aria-hidden="true">' + canal.simbolo + '</span><span>' + canal.rotulo + '</span>';
+    const li = document.createElement("li");
+    li.appendChild(a);
+    listaContatoDireto.appendChild(li);
+  });
+
+  // ---------- Formulário de contato (mailto + confirmação na tela) ----------
+  const formularioContato = document.getElementById("formularioContato");
+  const mensagemConfirmacao = document.getElementById("mensagemConfirmacao");
+
+  formularioContato.addEventListener("submit", function(evento){
+    evento.preventDefault();
+
+    const nome = document.getElementById("campoNome").value.trim();
+    const email = document.getElementById("campoEmail").value.trim();
+    const mensagem = document.getElementById("campoMensagem").value.trim();
+
+    const corpoEmail =
+      "Nome: " + nome + "\n" +
+      "E-mail: " + email + "\n\n" +
+      "Mensagem:\n" + mensagem;
+
+    const linkMailto =
+      "mailto:" + CONFIG.geral.email +
+      "?subject=" + encodeURIComponent(CONFIG.contato.assuntoEmail) +
+      "&body=" + encodeURIComponent(corpoEmail);
+
+    window.location.href = linkMailto;
+
+    mensagemConfirmacao.textContent = CONFIG.contato.mensagemSucesso;
+    mensagemConfirmacao.classList.add("visivel");
+    formularioContato.reset();
+  });
+
+  // ---------- Rodapé ----------
+  const rodapeRedes = document.getElementById("rodapeRedes");
+  CONFIG.redesSociais.forEach(function(rede){
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = rede.link;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.setAttribute("aria-label", rede.rotulo);
+    a.innerHTML = '<span aria-hidden="true">' + rede.simbolo + '</span>';
+    li.appendChild(a);
+    rodapeRedes.appendChild(li);
+  });
+
+  const anoAtual = new Date().getFullYear();
+  document.getElementById("rodapeCopyright").textContent =
+    "© " + anoAtual + " " + CONFIG.geral.nome + ". Todos os direitos reservados.";
+
+  /* =========================================================================
+     ANIMAÇÕES DE ENTRADA AO ROLAR A PÁGINA (IntersectionObserver)
+     ========================================================================= */
+  const observadorEntrada = new IntersectionObserver(function(entradas){
+    entradas.forEach(function(entrada){
+      if(entrada.isIntersecting){
+        entrada.target.classList.add("visivel");
+        observadorEntrada.unobserve(entrada.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+
+  document.querySelectorAll(".fade-up").forEach(function(elemento){
+    observadorEntrada.observe(elemento);
+  });
+
+  /* =========================================================================
+     CONTADORES ANIMADOS DA SEÇÃO DE RESULTADOS
+     ========================================================================= */
+  function animarContador(elemento, valorFinal, sufixo, decimais){
+    const duracao = 1600;
+    const inicio = performance.now();
+
+    function passo(agora){
+      const progresso = Math.min((agora - inicio) / duracao, 1);
+      const suavizado = 1 - Math.pow(1 - progresso, 3); // easing suave
+      const valorAtual = valorFinal * suavizado;
+      elemento.textContent = valorAtual.toLocaleString("pt-BR", {
+        minimumFractionDigits: decimais,
+        maximumFractionDigits: decimais
+      }) + sufixo;
+
+      if(progresso < 1){
+        requestAnimationFrame(passo);
+      }
+    }
+    requestAnimationFrame(passo);
+  }
+
+  let contadoresJaAnimados = false;
+  const secaoNumeros = document.getElementById("resultados");
+
+  const observadorNumeros = new IntersectionObserver(function(entradas){
+    entradas.forEach(function(entrada){
+      if(entrada.isIntersecting && !contadoresJaAnimados){
+        contadoresJaAnimados = true;
+        CONFIG.numeros.forEach(function(item, indice){
+          const elemento = document.getElementById("numero-" + indice);
+          animarContador(elemento, item.valor, item.sufixo, item.decimais || 0);
+        });
+        observadorNumeros.unobserve(entrada.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  observadorNumeros.observe(secaoNumeros);
+
+})();
+</script>
+</body>
+</html>
