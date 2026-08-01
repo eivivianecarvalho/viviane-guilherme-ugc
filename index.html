@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Viviane & Guilherme | Criadores de Conteúdo UGC</title>
 <meta name="description" content="Viviane & Guilherme, criadores de conteúdo UGC. Vídeos, reels, fotos de produto e unboxing para marcas que querem vender mais com conteúdo autêntico.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 
 <!-- Fontes do Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -224,7 +225,7 @@
   }
   .hero .container{
     display:grid;
-    grid-template-columns: 1.1fr .9fr;
+    grid-template-columns: 1fr 1fr;
     gap: 56px;
     align-items:center;
   }
@@ -237,59 +238,171 @@
     max-width: 520px;
   }
   .hero .acoes{ display:flex; gap:16px; flex-wrap:wrap; margin-top: 12px; }
-  .bloco-imagem{
-    border-radius: var(--raio);
+
+  /* Nome grande da dupla, em blocos de cor empilhados */
+  .nome-destaque{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .destaque{
+    display:inline-block;
+    font-family: var(--fonte-titulo);
+    font-weight: 800;
+    font-size: clamp(2.2rem, 5.6vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -.02em;
+    padding: 6px 18px;
+    border-radius: 12px;
+  }
+  .destaque-1{ background: var(--tinta); color: var(--verde-limao); }
+  .destaque-2{ background: var(--laranja); color: var(--branco); }
+
+  /* Redes sociais e contato rápido, logo abaixo dos botões da capa */
+  .hero-extra{
+    display:flex;
+    align-items:center;
+    gap: 20px;
+    flex-wrap:wrap;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--borda);
+  }
+  .redes-hero{
+    display:flex;
+    gap: 10px;
+    list-style:none;
+    margin:0; padding:0;
+  }
+  .redes-hero a{
+    width: 42px;
+    height: 42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius: 50%;
+    background: var(--verde-limao);
+    color: var(--tinta);
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+    font-size: .78rem;
+    transition: background .2s ease, color .2s ease, transform .2s ease;
+  }
+  .redes-hero a:hover{ background: var(--laranja); color: var(--branco); transform: translateY(-2px); }
+  .contato-rapido{ font-size: .92rem; color: var(--tinta-suave); margin: 0; }
+
+  /* Cartão em estilo polaroid: moldura branca, foto e legenda escrita à mão. Usado na foto flutuante da capa e na grade do "Quem somos" */
+  .polaroid{
+    display:flex;
+    flex-direction:column;
+    background: var(--branco);
+    border-radius: 14px;
+    padding: 12px 12px 0 12px;
     box-shadow: var(--sombra);
-    position:relative;
+    aspect-ratio: 4/5;
+  }
+  .polaroid-foto{
+    flex:1;
+    border-radius: 6px;
     overflow:hidden;
   }
-  /* Fileira com as duas fotos da dupla (uma de cada criador) */
-  .fotos-duo{
+  .polaroid-legenda{
+    display:block;
+    font-family: var(--fonte-charme);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--tinta);
+    text-align:center;
+    padding: 10px 0 14px 0;
+  }
+
+  /* Capa: espaço para as duas fotos da dupla, tamanho médio, lado a lado e levemente tortas */
+  .capa-fotos{
+    position: relative;
     display:flex;
-    gap: 16px;
+    align-items:flex-end;
+    justify-content:center;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 10px 0 24px 0;
   }
-  .fotos-duo .bloco-imagem{ flex: 1; min-width: 0; }
-  .hero .fotos-duo .bloco-imagem{ aspect-ratio: 3/4; }
-  .bloco-imagem::after{
-    content: attr(data-legenda);
+  .foto-capa{
+    position:relative;
+    width: 52%;
+    aspect-ratio: 4/5;
+    border-radius: 20px;
+    overflow:hidden;
+    box-shadow: var(--sombra);
+  }
+  .foto-capa .legenda-foto{
     position:absolute;
-    bottom:0; left:0; right:0;
-    padding: 18px 20px;
+    left: 16px;
+    bottom: 16px;
     font-family: var(--fonte-titulo);
-    font-weight:600;
-    font-size: .85rem;
+    font-weight: 700;
+    font-size: .82rem;
     color: var(--branco);
-    background: linear-gradient(0deg, rgba(0,0,0,0.35), transparent);
+    background: rgba(27,27,27,0.45);
+    padding: 7px 14px;
+    border-radius: 999px;
   }
+  .foto-capa-1{ transform: rotate(-6deg); margin-right: -10%; z-index:1; }
+  .foto-capa-2{ transform: rotate(5deg); margin-bottom: 30px; z-index:2; }
+
+  /* Quem somos: grade de polaroids meio tortos, cada um para um lado */
+  .grade-fotos-sobre{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 22px;
+  }
+  .grade-fotos-sobre .polaroid:nth-child(1){ transform: rotate(-5deg); }
+  .grade-fotos-sobre .polaroid:nth-child(2){ transform: rotate(4deg); margin-top: 20px; }
+  .grade-fotos-sobre .polaroid:nth-child(3){ transform: rotate(3deg); }
+  .grade-fotos-sobre .polaroid:nth-child(4){ transform: rotate(-4deg); margin-top: 20px; }
 
   /* ========== FAIXA DE MARCAS ========== */
   .faixa-marcas{
-    padding: 40px 0;
+    padding: 30px 0;
     background: var(--tinta);
     overflow:hidden;
   }
-  .faixa-marcas .rotulo{
-    text-align:center;
-    color: #cfcfcf;
-    font-family: var(--fonte-titulo);
-    font-size: .8rem;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    margin-bottom: 24px;
+  /* Logos em bolinhas, rolando continuamente para a esquerda (a lista é duplicada no JS para o loop ficar contínuo) */
+  .faixa-marcas-janela{
+    overflow:hidden;
   }
   .marcas-trilho{
     display:flex;
-    gap: 56px;
-    flex-wrap:wrap;
-    justify-content:center;
     align-items:center;
+    gap: 28px;
+    width: max-content;
+    animation: rolar-marcas 26s linear infinite;
   }
-  .marcas-trilho span{
-    font-family: var(--fonte-titulo);
-    font-weight: 700;
-    font-size: 1.3rem;
-    color: #f4efe4;
-    opacity: .85;
+  .faixa-marcas-janela:hover .marcas-trilho{ animation-play-state: paused; }
+  .marca-circulo{
+    flex-shrink:0;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: var(--branco);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 16px;
+    box-shadow: var(--sombra);
+  }
+  .marca-circulo img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  @keyframes rolar-marcas{
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .marcas-trilho{ animation: none; }
   }
 
   /* ========== SOBRE ========== */
@@ -299,7 +412,6 @@
     gap: 56px;
     align-items:center;
   }
-  .sobre .fotos-duo .bloco-imagem{ aspect-ratio: 1/1; }
   .sobre h2{ font-size: clamp(1.7rem, 3vw, 2.3rem); }
 
   /* ========== PORTFÓLIO ========== */
@@ -325,30 +437,71 @@
   .filtro-botao:hover{ border-color: var(--laranja); color: var(--laranja); }
   .filtro-botao.ativo{ background: var(--laranja); border-color: var(--laranja); color: var(--branco); }
 
-  .grade-portfolio{
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+  /* Carrossel genérico: uma trilha que rola na horizontal com botões de seta.
+     Usado tanto no portfólio quanto nos serviços. */
+  .carrossel{
+    display:flex;
+    align-items:center;
+    gap: 14px;
   }
+  .carrossel-trilho{
+    display:flex;
+    flex: 1 1 0%;
+    min-width: 0;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding: 4px 2px 10px 2px;
+  }
+  .carrossel-trilho::-webkit-scrollbar{ display:none; }
+  .carrossel-seta{
+    flex-shrink:0;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1.5px solid var(--borda);
+    background: var(--branco);
+    color: var(--tinta);
+    font-size: 1.5rem;
+    line-height:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .carrossel-seta:hover{ background: var(--laranja); color: var(--branco); border-color: var(--laranja); }
+
   .item-portfolio{
+    scroll-snap-align: start;
+    flex: 0 0 calc((100% - 48px) / 3);
     border-radius: var(--raio);
     overflow:hidden;
     box-shadow: var(--sombra);
-    aspect-ratio: 3/4;
-    position:relative;
+    background: var(--branco);
     transition: transform .35s ease, opacity .35s ease;
   }
   .item-portfolio:hover{ transform: translateY(-6px); }
   .item-portfolio.escondido{
     display:none;
   }
-  .item-portfolio .info{
-    position:absolute;
-    left:0; right:0; bottom:0;
-    padding: 20px;
-    background: linear-gradient(0deg, rgba(0,0,0,0.55), transparent);
+  /* Vídeo (embed do YouTube) ou bloco em gradiente, sempre no formato vertical (estilo Reels/Shorts) */
+  .video-portfolio{
+    position:relative;
+    aspect-ratio: 9/16;
+    background: var(--tinta);
   }
-  .item-portfolio .info span{
+  .video-portfolio iframe{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
+  }
+  .legenda-portfolio{ padding: 16px 18px; }
+  .legenda-portfolio .tag-categoria{
     display:inline-block;
     font-family: var(--fonte-titulo);
     font-size: .7rem;
@@ -361,19 +514,15 @@
     border-radius: 999px;
     margin-bottom: 8px;
   }
-  .item-portfolio .info h3{
-    color: var(--branco);
-    font-size: 1.05rem;
+  .legenda-portfolio h3{
+    font-size: 1rem;
     margin:0;
   }
 
   /* ========== SERVIÇOS ========== */
-  .grade-servicos{
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
   .card-servico{
+    scroll-snap-align: start;
+    flex: 0 0 calc((100% - 48px) / 3);
     background: var(--branco);
     border: 1.5px solid var(--borda);
     border-radius: var(--raio);
@@ -392,59 +541,108 @@
   .card-servico h3{ font-size: 1.15rem; }
   .card-servico p{ font-size: .95rem; margin-bottom:0; }
 
-  /* ========== NÚMEROS ========== */
-  .numeros{
-    background: var(--verde-limao);
+  /* ========== INVESTIMENTO ========== */
+  .valores-avulsos{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap: 10px 36px;
+    background: var(--branco);
+    border: 1.5px solid var(--borda);
+    border-radius: var(--raio);
+    padding: 24px 28px;
+    margin-bottom: 48px;
   }
-  .grade-numeros{
-    display:grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    text-align:center;
-  }
-  .item-numero .valor{
+  .valores-avulsos-titulo{
+    flex-basis: 100%;
     font-family: var(--fonte-titulo);
-    font-weight: 800;
-    font-size: clamp(2.2rem, 4vw, 3rem);
-    color: var(--laranja);
-    letter-spacing: -.02em;
+    font-weight: 700;
+    font-size: .8rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--tinta-suave);
   }
-  .item-numero .rotulo{
-    font-weight: 600;
-    color: var(--tinta);
-    font-size: .95rem;
+  .valores-avulsos ul{
+    display:flex;
+    flex-wrap:wrap;
+    gap: 10px 36px;
+    list-style:none;
+    margin:0;
+    padding:0;
   }
+  .valores-avulsos li{ font-weight: 600; color: var(--tinta); font-size: .95rem; }
+  .valores-avulsos li strong{ color: var(--laranja); }
 
-  /* ========== DEPOIMENTOS ========== */
-  .grade-depoimentos{
+  .grade-pacotes{
     display:grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
+    align-items:start;
+    max-width: 700px;
+    margin: 0 auto;
   }
-  .card-depoimento{
-    background: var(--branco);
-    border-radius: var(--raio);
-    padding: 32px;
-    box-shadow: var(--sombra);
+  .card-pacote{
     position:relative;
+    background: var(--branco);
+    border: 1.5px solid var(--borda);
+    border-radius: var(--raio);
+    padding: 40px 28px 32px 28px;
+    text-align:center;
+    transition: transform .25s ease, box-shadow .25s ease;
   }
-  .card-depoimento .aspas{
-    font-family: var(--fonte-charme);
-    font-style: italic;
-    font-size: 3rem;
-    color: var(--verde-limao-escuro);
-    line-height: .5;
-    display:block;
-    margin-bottom: 16px;
+  .card-pacote:hover{ transform: translateY(-6px); }
+  .card-pacote.destaque{
+    border-color: var(--laranja);
+    box-shadow: var(--sombra);
   }
-  .card-depoimento p.fala{ color: var(--tinta); font-size: 1.02rem; }
-  .autor{ display:flex; align-items:center; gap:12px; margin-top: 16px; }
-  .autor .avatar{
-    width: 44px; height:44px; border-radius:50%;
+  .selo-pacote{
+    position:absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--laranja);
+    color: var(--branco);
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+    font-size: .72rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 7px 18px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .card-pacote h3{ font-size: 1.25rem; margin-bottom: 22px; }
+  .card-pacote ul{
+    list-style:none;
+    margin: 0 0 24px 0;
+    padding: 0;
+    text-align:left;
+    display:flex;
+    flex-direction:column;
+    gap: 10px;
+  }
+  .card-pacote li{
+    display:flex;
+    align-items:flex-start;
+    gap: 8px;
+    font-size: .92rem;
+    color: var(--tinta-suave);
+  }
+  .card-pacote li::before{
+    content: "✓";
+    color: var(--laranja);
+    font-weight: 700;
     flex-shrink:0;
   }
-  .autor .nome{ font-weight:700; font-family: var(--fonte-titulo); font-size: .95rem; color: var(--tinta); }
-  .autor .empresa{ font-size: .85rem; color: var(--tinta-suave); }
+  .economia-pacote{ font-weight: 700; color: var(--laranja); font-size: .9rem; margin-bottom: 6px; }
+  .preco-pacote{
+    font-family: var(--fonte-titulo);
+    font-weight: 800;
+    font-size: 2rem;
+    color: var(--tinta);
+    letter-spacing: -.02em;
+  }
+
 
   /* ========== CONTATO ========== */
   .contato .container{
@@ -555,14 +753,14 @@
   /* ========== RESPONSIVO ========== */
   @media (max-width: 980px){
     .hero .container{ grid-template-columns: 1fr; }
-    .hero .fotos-duo{ order:-1; }
-    .hero .fotos-duo .bloco-imagem{ aspect-ratio: 4/5; }
+    .capa-fotos{ order:-1; max-width: 380px; }
+    .nome-destaque{ align-items:center; }
+    .hero .texto-hero{ text-align:center; }
+    .hero .acoes, .hero-extra{ justify-content:center; }
+    .hero p.subtitulo{ margin-left:auto; margin-right:auto; }
     .sobre .container{ grid-template-columns: 1fr; }
-    .sobre .fotos-duo .bloco-imagem{ aspect-ratio: 1/1; }
-    .grade-portfolio{ grid-template-columns: repeat(2, 1fr); }
-    .grade-servicos{ grid-template-columns: repeat(2, 1fr); }
-    .grade-numeros{ grid-template-columns: repeat(2, 1fr); }
-    .grade-depoimentos{ grid-template-columns: 1fr; }
+    .grade-fotos-sobre{ max-width: 420px; margin: 0 auto; }
+    .item-portfolio, .card-servico{ flex-basis: calc((100% - 24px) / 2); }
     .contato .container{ grid-template-columns: 1fr; }
   }
 
@@ -570,20 +768,24 @@
     .menu-desktop{ display:none; }
     .botao-hamburguer{ display:flex; }
     section{ padding: 64px 0; }
-    .grade-portfolio{ grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .grade-servicos{ grid-template-columns: 1fr; }
-    .grade-numeros{ grid-template-columns: repeat(2, 1fr); gap: 28px 16px; }
     .hero{ padding-top: 120px; }
     .contato-direto{ padding: 28px; }
   }
 
+  @media (max-width: 640px){
+    .item-portfolio, .card-servico{ flex-basis: 82%; }
+  }
+
   @media (max-width: 480px){
     .container{ padding: 0 18px; }
-    .grade-portfolio{ grid-template-columns: 1fr; }
     .hero .acoes{ flex-direction:column; align-items:stretch; }
     .hero .acoes .botao{ width:100%; }
-    .fotos-duo{ flex-direction: column; }
-    .hero .fotos-duo .bloco-imagem, .sobre .fotos-duo .bloco-imagem{ aspect-ratio: 16/10; }
+    .capa-fotos{ max-width: 280px; }
+    .destaque{ font-size: clamp(1.8rem, 10vw, 2.4rem); }
+    .grade-fotos-sobre{ gap: 22px 14px; }
+    .grade-fotos-sobre .polaroid{ margin-top: 0 !important; }
+    .grade-pacotes{ grid-template-columns: 1fr; }
+    .card-pacote.destaque{ order:-1; }
   }
 </style>
 </head>
@@ -613,45 +815,72 @@
   <section class="hero" id="inicio">
     <div class="container">
       <div class="texto-hero fade-up">
+        <div class="nome-destaque">
+          <span class="destaque destaque-1" id="destaqueNome1"></span>
+          <span class="destaque destaque-2" id="destaqueNome2"></span>
+        </div>
         <h1 id="heroTitulo"></h1>
         <p class="subtitulo" id="heroSubtitulo"></p>
         <div class="acoes">
           <a href="#contato" class="botao botao-primario" id="heroCta"></a>
           <a href="#portfolio" class="botao botao-secundario">Ver portfólio</a>
         </div>
+        <div class="hero-extra">
+          <ul class="redes-hero" id="redesHero" aria-label="Redes sociais"></ul>
+          <p class="contato-rapido" id="contatoRapidoHero"></p>
+        </div>
       </div>
-      <!-- Blocos em gradiente no lugar das fotos individuais da dupla na capa.
-           Para usar fotos reais, troque cada div .bloco-imagem por, por exemplo:
-           <img src="foto-viviane.jpg" alt="Viviane, criadora de conteúdo UGC">
-           <img src="foto-guilherme.jpg" alt="Guilherme, criador de conteúdo UGC"> -->
-      <div class="fotos-duo">
-        <div class="bloco-imagem fade-up" data-legenda="Viviane" style="background: linear-gradient(135deg, #d46928, #f2a65a);"></div>
-        <div class="bloco-imagem fade-up" data-legenda="Guilherme" style="background: linear-gradient(150deg, #1b1b1b, #4a4a4a 55%, #d46928);"></div>
+      <!-- Espaço para as duas fotos da dupla na capa, tamanho médio, lado a lado.
+           Para usar fotos reais, troque cada div .foto-capa por, por exemplo:
+           <img src="foto-guilherme.jpg" alt="Guilherme, criador de conteúdo UGC">
+           <img src="foto-viviane.jpg" alt="Viviane, criadora de conteúdo UGC"> -->
+      <div class="capa-fotos fade-up">
+        <div class="foto-capa foto-capa-1" style="background: linear-gradient(150deg, #1b1b1b, #4a4a4a 55%, #d46928);">
+          <span class="legenda-foto">Guilherme</span>
+        </div>
+        <div class="foto-capa foto-capa-2" style="background: linear-gradient(135deg, #d46928, #f2a65a);">
+          <span class="legenda-foto">Viviane</span>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ===================== FAIXA DE MARCAS ===================== -->
   <section class="faixa-marcas" aria-label="Marcas parceiras">
-    <p class="rotulo fade-up">Marcas que já confiaram no nosso conteúdo</p>
-    <div class="marcas-trilho fade-up" id="listaMarcas"></div>
+    <!-- As logos das marcas parceiras rolam para a esquerda sem parar (lista editável em CONFIG.marcas). -->
+    <div class="faixa-marcas-janela fade-up">
+      <div class="marcas-trilho" id="listaMarcas"></div>
+    </div>
   </section>
 
   <!-- ===================== SOBRE ===================== -->
   <section class="sobre" id="sobre">
     <div class="container">
-      <!-- Blocos em gradiente no lugar das fotos individuais na seção "Quem somos".
-           Para usar fotos reais, troque cada div .bloco-imagem por, por exemplo:
-           <img src="foto-viviane-sobre.jpg" alt="Viviane sorrindo, gravando conteúdo UGC">
-           <img src="foto-guilherme-sobre.jpg" alt="Guilherme sorrindo, gravando conteúdo UGC"> -->
-      <div class="fotos-duo">
-        <div class="bloco-imagem fade-up" data-legenda="Viviane" style="background: linear-gradient(150deg, #d46928, #e9f5c9);"></div>
-        <div class="bloco-imagem fade-up" data-legenda="Guilherme" style="background: linear-gradient(150deg, #1b1b1b, #4a4a4a 60%, #d46928);"></div>
+      <!-- Grade com vários espaços de foto em estilo polaroid, cada uma levemente torta.
+           Para usar fotos reais, troque cada div .polaroid-foto por, por exemplo:
+           <img src="foto-viviane-sobre.jpg" alt="Viviane sorrindo, gravando conteúdo UGC"> -->
+      <div class="grade-fotos-sobre">
+        <div class="polaroid fade-up">
+          <div class="polaroid-foto" style="background: linear-gradient(150deg, #d46928, #e9f5c9);"></div>
+          <span class="polaroid-legenda">Viviane</span>
+        </div>
+        <div class="polaroid fade-up">
+          <div class="polaroid-foto" style="background: linear-gradient(150deg, #1b1b1b, #4a4a4a 60%, #d46928);"></div>
+          <span class="polaroid-legenda">Guilherme</span>
+        </div>
+        <div class="polaroid fade-up">
+          <div class="polaroid-foto" style="background: linear-gradient(150deg, #b9d97a, #d46928);"></div>
+          <span class="polaroid-legenda">Bastidores</span>
+        </div>
+        <div class="polaroid fade-up">
+          <div class="polaroid-foto" style="background: linear-gradient(160deg, #e9f5c9, #f2a65a);"></div>
+          <span class="polaroid-legenda">Gravação</span>
+        </div>
       </div>
       <div class="fade-up">
         <span class="kicker" style="display:inline-block;font-family:var(--fonte-titulo);font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--laranja);background:var(--verde-limao);padding:6px 16px;border-radius:999px;margin-bottom:16px;">Quem somos</span>
         <h2 id="sobreTitulo"></h2>
-        <p id="sobreTexto"></p>
+        <div id="sobreTexto"></div>
         <a href="#contato" class="botao botao-primario">Vamos conversar</a>
       </div>
     </div>
@@ -668,7 +897,12 @@
 
       <div class="filtros fade-up" id="filtrosPortfolio" role="group" aria-label="Filtrar portfólio por categoria"></div>
 
-      <div class="grade-portfolio" id="gradePortfolio"></div>
+      <!-- Carrossel horizontal: os trabalhos passam de 3 em 3 (conforme a tela) ao clicar nas setas -->
+      <div class="carrossel fade-up">
+        <button type="button" class="carrossel-seta" id="portfolioSetaEsq" aria-label="Ver trabalhos anteriores">‹</button>
+        <div class="carrossel-trilho" id="gradePortfolio"></div>
+        <button type="button" class="carrossel-seta" id="portfolioSetaDir" aria-label="Ver próximos trabalhos">›</button>
+      </div>
     </div>
   </section>
 
@@ -680,29 +914,34 @@
         <h2>O que a gente entrega para a sua marca</h2>
         <p>Conteúdo autêntico, pensado para performar em anúncios e redes sociais.</p>
       </div>
-      <div class="grade-servicos" id="gradeServicos"></div>
+      <!-- Carrossel horizontal: os serviços passam de 3 em 3 (conforme a tela) ao clicar nas setas -->
+      <div class="carrossel fade-up">
+        <button type="button" class="carrossel-seta" id="servicosSetaEsq" aria-label="Ver serviços anteriores">‹</button>
+        <div class="carrossel-trilho" id="gradeServicos"></div>
+        <button type="button" class="carrossel-seta" id="servicosSetaDir" aria-label="Ver próximos serviços">›</button>
+      </div>
     </div>
   </section>
 
-  <!-- ===================== NÚMEROS / RESULTADOS ===================== -->
-  <section class="numeros" id="resultados">
-    <div class="container">
-      <div class="secao-titulo fade-up">
-        <span class="kicker">Resultados</span>
-        <h2>Números que mostram o nosso trabalho</h2>
-      </div>
-      <div class="grade-numeros" id="gradeNumeros"></div>
-    </div>
-  </section>
+  <!-- As seções "Resultados" e "Depoimentos" foram removidas da página por enquanto (a pedido).
+       Os dados de CONFIG.numeros e CONFIG.depoimentos continuam no topo do script, prontos para
+       quando quiser reativar essas seções. -->
 
-  <!-- ===================== DEPOIMENTOS ===================== -->
-  <section class="depoimentos" id="depoimentos">
+  <!-- ===================== INVESTIMENTO ===================== -->
+  <section class="investimento" id="investimento">
     <div class="container">
       <div class="secao-titulo fade-up">
-        <span class="kicker">Depoimentos</span>
-        <h2>O que as marcas dizem sobre a gente</h2>
+        <span class="kicker">Investimento</span>
+        <h2 id="investimentoTitulo"></h2>
+        <p id="investimentoTexto"></p>
       </div>
-      <div class="grade-depoimentos" id="gradeDepoimentos"></div>
+
+      <div class="valores-avulsos fade-up">
+        <span class="valores-avulsos-titulo">Valores unitários</span>
+        <ul id="listaValoresAvulsos"></ul>
+      </div>
+
+      <div class="grade-pacotes" id="gradePacotes"></div>
     </div>
   </section>
 
@@ -763,6 +1002,8 @@ const CONFIG = {
   geral: {
     nome: "Viviane & Guilherme",
     nomeCurto: "Vivi & Gui",
+    nomeDestaque1: "Viviane",
+    nomeDestaque2: "& Guilherme",
     profissao: "Criadores de Conteúdo UGC",
     email: "vivicarvalho.ugc@gmail.com",
     telefone: "12981172902",
@@ -779,8 +1020,7 @@ const CONFIG = {
     { rotulo: "Sobre", alvo: "#sobre" },
     { rotulo: "Portfólio", alvo: "#portfolio" },
     { rotulo: "Serviços", alvo: "#servicos" },
-    { rotulo: "Resultados", alvo: "#resultados" },
-    { rotulo: "Depoimentos", alvo: "#depoimentos" },
+    { rotulo: "Investimento", alvo: "#investimento" },
     { rotulo: "Contato", alvo: "#contato" }
   ],
 
@@ -791,39 +1031,39 @@ const CONFIG = {
     textoBotao: "Fale comigo"
   },
 
-  // EDITE AQUI: lista de marcas parceiras (aparecem na faixa escura abaixo do hero)
+  // EDITE AQUI: lista de marcas parceiras (aparecem na faixa escura abaixo do hero).
+  // Para trocar ou adicionar uma logo, coloque o arquivo de imagem em assets/marcas/ e aponte o campo "logo" para ele.
   marcas: [
-    "Bella Cosmetics",
-    "NutriVida",
-    "Trilha Urbana",
-    "Sabor Caseiro",
-    "FitPro Suplementos",
-    "Viaja Fácil",
-    "Doce Lar Casa"
+    { nome: "Club Social", logo: "assets/marcas/club-social.jpg" },
+    { nome: "Monster Energy", logo: "assets/marcas/monster-energy.jpg" },
+    { nome: "+Mu", logo: "assets/marcas/mais-mu.png" },
+    { nome: "Serasa Experian", logo: "assets/marcas/serasa-experian.png" },
+    { nome: "PicPay", logo: "assets/marcas/picpay.jpg" }
   ],
 
-  // EDITE AQUI: texto da seção sobre
+  // EDITE AQUI: texto da seção sobre (cada item da lista vira um parágrafo separado)
   sobre: {
     titulo: "A dupla por trás das câmeras",
-    texto: "Somos Viviane e Guilherme, apaixonados por contar histórias reais sobre produtos e experiências. Unimos naturalidade na frente das câmeras com estratégia de conteúdo, entregando vídeos e fotos que parecem indicação de amigo e não propaganda. Já ajudamos marcas de vários segmentos a aumentar o engajamento e a conversão em campanhas, sempre com entrega rápida, comunicação clara e respeito ao prazo combinado."
+    texto: [
+      "Somos uma dupla de criadores de UGC especializada em produzir conteúdos autênticos, criativos e estratégicos para marcas que desejam gerar conexão e impulsionar vendas.",
+      "Criamos vídeos para TikTok, Instagram e campanhas publicitárias, sempre com foco em transmitir confiança, destacar os diferenciais do produto e engajar o público.",
+      "Unimos criatividade, organização e estratégia para entregar conteúdos de alta qualidade, alinhados aos objetivos de cada marca e prontos para gerar resultados."
+    ]
   },
 
-  // EDITE AQUI: itens do portfólio. A categoria precisa bater com uma das categorias abaixo em "categoriasPortfolio"
+  // EDITE AQUI: itens do portfólio, um vídeo por nicho. A categoria precisa bater com uma das categorias abaixo em "categoriasPortfolio".
+  // Para colocar um vídeo real, publique o vídeo como "não listado" no YouTube e adicione o campo "video" com o ID dele
+  // (o trecho depois de "youtu.be/" ou "shorts/" no link, sem parâmetros depois do "?"). Sem o campo "video", o card usa o gradiente.
   portfolio: [
-    { titulo: "Rotina de skincare com sérum facial", categoria: "Beleza", gradiente: "linear-gradient(135deg, #d46928, #f2a65a)" },
-    { titulo: "Resenha de batom líquido matte", categoria: "Beleza", gradiente: "linear-gradient(150deg, #e9f5c9, #b9d97a)" },
-    { titulo: "Look de inverno com peças da coleção", categoria: "Moda", gradiente: "linear-gradient(135deg, #1b1b1b, #4a4a4a)" },
-    { titulo: "Try on de acessórios para o dia a dia", categoria: "Moda", gradiente: "linear-gradient(150deg, #d46928, #e9f5c9)" },
     { titulo: "Receita rápida com tempero pronto", categoria: "Comida", gradiente: "linear-gradient(135deg, #f2a65a, #e9f5c9)" },
-    { titulo: "Unboxing de kit gourmet", categoria: "Comida", gradiente: "linear-gradient(150deg, #b9d97a, #d46928)" },
-    { titulo: "Treino em casa com suplemento pré-treino", categoria: "Fitness", gradiente: "linear-gradient(135deg, #1b1b1b, #d46928)" },
-    { titulo: "Resenha de roupa esportiva", categoria: "Fitness", gradiente: "linear-gradient(160deg, #e9f5c9, #f2a65a)" },
-    { titulo: "Vlog de check in em pousada", categoria: "Viagem", gradiente: "linear-gradient(135deg, #d46928, #4a4a4a)" },
-    { titulo: "Mala organizada com produtos de viagem", categoria: "Viagem", gradiente: "linear-gradient(150deg, #b9d97a, #e9f5c9)" }
+    { titulo: "Creatina +Mu", categoria: "Fitness", video: "Elush87N4Vc", gradiente: "linear-gradient(135deg, #1b1b1b, #d46928)" },
+    { titulo: "App Serasa", categoria: "Aplicativos", video: "FXngtgjzc8E", gradiente: "linear-gradient(150deg, #d46928, #4a4a4a)" },
+    { titulo: "Site Serasa", categoria: "Sites/Apps", video: "uVoMlojBU4o", gradiente: "linear-gradient(135deg, #1b1b1b, #4a4a4a)" },
+    { titulo: "Resenha de acessórios para celular e notebook", categoria: "Acessórios", gradiente: "linear-gradient(150deg, #b9d97a, #e9f5c9)" }
   ],
 
   // EDITE AQUI: categorias usadas nos filtros do portfólio (a primeira, "Todos", é fixa)
-  categoriasPortfolio: ["Todos", "Beleza", "Moda", "Comida", "Fitness", "Viagem"],
+  categoriasPortfolio: ["Todos", "Comida", "Fitness", "Aplicativos", "Sites/Apps", "Acessórios"],
 
   // EDITE AQUI: serviços oferecidos
   servicos: [
@@ -835,6 +1075,36 @@ const CONFIG = {
     { icone: "💬", titulo: "Depoimento em Vídeo", descricao: "Relato autêntico de experiência com o produto ou serviço, reforçando prova social para a sua marca." }
   ],
 
+  // EDITE AQUI: seção de investimento (valores avulsos e pacotes)
+  investimento: {
+    titulo: "Pacotes e valores",
+    texto: "Escolha o pacote que faz mais sentido para a sua campanha. Todos os pacotes incluem roteiro personalizado, gravação e edição profissional.",
+    valoresAvulsos: [
+      { item: "1 vídeo UGC", valor: "R$ 300,00" },
+      { item: "Gancho extra (variação de abertura)", valor: "R$ 49,00" },
+      { item: "Renovação de uso em anúncios (+3 meses)", valor: "R$ 75,00" }
+    ],
+    pacotes: [
+      {
+        nome: "Pacote Gold",
+        destaque: true,
+        selo: "Mais pedido",
+        itens: ["5 vídeos UGC", "Roteiro personalizado", "Gravação e edição", "6 meses de uso em anúncios", "1 gancho extra incluso"],
+        economia: "Economize R$ 500,00",
+        preco: "R$ 1.000,00"
+      },
+      {
+        nome: "Pacote Silver",
+        destaque: false,
+        itens: ["3 vídeos UGC", "Roteiro personalizado", "Gravação e edição", "6 meses de uso em anúncios"],
+        economia: "Economize R$ 175,00",
+        preco: "R$ 800,00"
+      }
+    ]
+  },
+
+  // As seções "Resultados" e "Depoimentos" estão desativadas por enquanto (a pedido).
+  // Os dados abaixo continuam aqui prontos para quando quiser reativar essas seções.
   // EDITE AQUI: números de resultado (contadores animados). Use "decimais" para casas decimais quando precisar
   numeros: [
     { valor: 85, sufixo: " mil", rotulo: "Seguidores engajados", decimais: 0 },
@@ -933,21 +1203,70 @@ const CONFIG = {
   });
 
   // ---------- Hero ----------
+  document.getElementById("destaqueNome1").textContent = CONFIG.geral.nomeDestaque1;
+  document.getElementById("destaqueNome2").textContent = CONFIG.geral.nomeDestaque2;
   document.getElementById("heroTitulo").textContent = CONFIG.hero.titulo;
   document.getElementById("heroSubtitulo").textContent = CONFIG.hero.subtitulo;
   document.getElementById("heroCta").textContent = CONFIG.hero.textoBotao;
 
-  // ---------- Faixa de marcas ----------
-  const listaMarcas = document.getElementById("listaMarcas");
-  CONFIG.marcas.forEach(function(marca){
-    const span = document.createElement("span");
-    span.textContent = marca;
-    listaMarcas.appendChild(span);
+  const redesHero = document.getElementById("redesHero");
+  CONFIG.redesSociais.forEach(function(rede){
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = rede.link;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.setAttribute("aria-label", rede.rotulo);
+    a.innerHTML = '<span aria-hidden="true">' + rede.simbolo + '</span>';
+    li.appendChild(a);
+    redesHero.appendChild(li);
   });
+
+  document.getElementById("contatoRapidoHero").textContent =
+    CONFIG.geral.email + "  ·  " + CONFIG.geral.telefoneFormatado;
+
+  // ---------- Faixa de marcas ----------
+  // A lista é repetida até preencher pelo menos duas telas de largura, e só depois duplicada
+  // inteira uma vez, para a rolagem nunca mostrar um vão vazio antes de repetir o ciclo.
+  const listaMarcas = document.getElementById("listaMarcas");
+  const janelaMarcas = document.querySelector(".faixa-marcas-janela");
+
+  function criarCirculoMarca(marca){
+    const circulo = document.createElement("div");
+    circulo.className = "marca-circulo";
+    circulo.setAttribute("aria-hidden", "true");
+    circulo.innerHTML = '<img src="' + marca.logo + '" alt="" loading="lazy">';
+    return circulo;
+  }
+
+  CONFIG.marcas.forEach(function(marca){ listaMarcas.appendChild(criarCirculoMarca(marca)); });
+
+  const larguraNecessaria = janelaMarcas.clientWidth * 2;
+  while(listaMarcas.scrollWidth > 0 && listaMarcas.scrollWidth < larguraNecessaria){
+    CONFIG.marcas.forEach(function(marca){ listaMarcas.appendChild(criarCirculoMarca(marca)); });
+  }
+
+  // Duplica o conjunto inteiro uma vez: a animação anda exatamente a largura de uma cópia,
+  // então quando ela reinicia o visual continua idêntico (loop contínuo, sem espaço vazio).
+  listaMarcas.innerHTML += listaMarcas.innerHTML;
+
+  const larguraUmaCopia = listaMarcas.scrollWidth / 2;
+  const velocidadePixelsPorSegundo = 45;
+  listaMarcas.style.animationDuration = (larguraUmaCopia / velocidadePixelsPorSegundo) + "s";
+
+  listaMarcas.setAttribute(
+    "aria-label",
+    "Marcas parceiras: " + CONFIG.marcas.map(function(marca){ return marca.nome; }).join(", ")
+  );
 
   // ---------- Sobre ----------
   document.getElementById("sobreTitulo").textContent = CONFIG.sobre.titulo;
-  document.getElementById("sobreTexto").textContent = CONFIG.sobre.texto;
+  const sobreTexto = document.getElementById("sobreTexto");
+  CONFIG.sobre.texto.forEach(function(paragrafo){
+    const p = document.createElement("p");
+    p.textContent = paragrafo;
+    sobreTexto.appendChild(p);
+  });
 
   // ---------- Portfólio + filtros ----------
   const filtrosPortfolio = document.getElementById("filtrosPortfolio");
@@ -957,10 +1276,23 @@ const CONFIG = {
     const div = document.createElement("div");
     div.className = "item-portfolio fade-up";
     div.setAttribute("data-categoria", item.categoria);
-    div.style.background = item.gradiente;
-    div.innerHTML = '<div class="info"><span>' + item.categoria + '</span><h3>' + item.titulo + '</h3></div>';
-    // Para usar uma foto real neste card, troque o style de background por:
-    // background-image: url('sua-foto.jpg'); background-size: cover; background-position: center;
+
+    let blocoMidia;
+    if(item.video){
+      blocoMidia =
+        '<div class="video-portfolio">' +
+          '<iframe src="https://www.youtube-nocookie.com/embed/' + item.video + '" title="' + item.titulo + '" ' +
+          'loading="lazy" referrerpolicy="strict-origin-when-cross-origin" ' +
+          'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' +
+        '</div>';
+    } else {
+      // Bloco em gradiente no lugar do vídeo. Para trocar por um vídeo real, adicione
+      // video: "ID_DO_VIDEO_NO_YOUTUBE" a este item lá em CONFIG.portfolio.
+      blocoMidia = '<div class="video-portfolio" style="background:' + item.gradiente + ';"></div>';
+    }
+
+    div.innerHTML = blocoMidia +
+      '<div class="legenda-portfolio"><span class="tag-categoria">' + item.categoria + '</span><h3>' + item.titulo + '</h3></div>';
     gradePortfolio.appendChild(div);
   });
 
@@ -979,6 +1311,7 @@ const CONFIG = {
         const mostrar = categoria === "Todos" || categoriaCartao === categoria;
         cartao.classList.toggle("escondido", !mostrar);
       });
+      gradePortfolio.scrollTo({ left: 0 });
     });
     filtrosPortfolio.appendChild(botao);
   });
@@ -992,35 +1325,57 @@ const CONFIG = {
     gradeServicos.appendChild(div);
   });
 
-  // ---------- Números / contadores ----------
-  const gradeNumeros = document.getElementById("gradeNumeros");
-  CONFIG.numeros.forEach(function(item, indice){
-    const div = document.createElement("div");
-    div.className = "item-numero fade-up";
-    div.innerHTML = '<div class="valor" id="numero-' + indice + '">0</div><div class="rotulo">' + item.rotulo + '</div>';
-    gradeNumeros.appendChild(div);
+  // ---------- Setas dos carrosséis (portfólio e serviços) ----------
+  function configurarCarrossel(trilho, setaEsquerda, setaDireita){
+    setaDireita.addEventListener("click", function(){
+      trilho.scrollBy({ left: trilho.clientWidth, behavior: "smooth" });
+    });
+    setaEsquerda.addEventListener("click", function(){
+      trilho.scrollBy({ left: -trilho.clientWidth, behavior: "smooth" });
+    });
+  }
+  configurarCarrossel(
+    gradePortfolio,
+    document.getElementById("portfolioSetaEsq"),
+    document.getElementById("portfolioSetaDir")
+  );
+  configurarCarrossel(
+    gradeServicos,
+    document.getElementById("servicosSetaEsq"),
+    document.getElementById("servicosSetaDir")
+  );
+
+  // ---------- Investimento ----------
+  document.getElementById("investimentoTitulo").textContent = CONFIG.investimento.titulo;
+  document.getElementById("investimentoTexto").textContent = CONFIG.investimento.texto;
+
+  const listaValoresAvulsos = document.getElementById("listaValoresAvulsos");
+  CONFIG.investimento.valoresAvulsos.forEach(function(avulso){
+    const li = document.createElement("li");
+    li.innerHTML = avulso.item + ' <strong>' + avulso.valor + '</strong>';
+    listaValoresAvulsos.appendChild(li);
   });
 
-  // ---------- Depoimentos ----------
-  const gradeDepoimentos = document.getElementById("gradeDepoimentos");
-  const gradientesAvatar = [
-    "linear-gradient(135deg, #d46928, #f2a65a)",
-    "linear-gradient(135deg, #b9d97a, #e9f5c9)",
-    "linear-gradient(135deg, #1b1b1b, #4a4a4a)",
-    "linear-gradient(135deg, #f2a65a, #d46928)"
-  ];
-  CONFIG.depoimentos.forEach(function(item, indice){
+  const gradePacotes = document.getElementById("gradePacotes");
+  CONFIG.investimento.pacotes.forEach(function(pacote){
     const div = document.createElement("div");
-    div.className = "card-depoimento fade-up";
+    div.className = "card-pacote fade-up" + (pacote.destaque ? " destaque" : "");
+
+    const itensHtml = pacote.itens.map(function(item){ return "<li>" + item + "</li>"; }).join("");
+    const seloHtml = pacote.selo ? '<span class="selo-pacote">' + pacote.selo + '</span>' : "";
+
     div.innerHTML =
-      '<span class="aspas" aria-hidden="true">&ldquo;</span>' +
-      '<p class="fala">' + item.fala + '</p>' +
-      '<div class="autor">' +
-        '<div class="avatar" style="background:' + gradientesAvatar[indice % gradientesAvatar.length] + ';" aria-hidden="true"></div>' +
-        '<div><div class="nome">' + item.nome + '</div><div class="empresa">' + item.empresa + '</div></div>' +
-      '</div>';
-    gradeDepoimentos.appendChild(div);
+      seloHtml +
+      "<h3>" + pacote.nome + "</h3>" +
+      "<ul>" + itensHtml + "</ul>" +
+      '<div class="economia-pacote">' + pacote.economia + '</div>' +
+      '<div class="preco-pacote">' + pacote.preco + '</div>';
+
+    gradePacotes.appendChild(div);
   });
+
+  // As seções "Resultados" e "Depoimentos" estão desativadas por enquanto, então não são
+  // renderizadas aqui. Os dados de CONFIG.numeros e CONFIG.depoimentos seguem prontos no topo do script.
 
   // ---------- Contato direto ----------
   const listaContatoDireto = document.getElementById("listaContatoDireto");
@@ -1101,47 +1456,6 @@ const CONFIG = {
   document.querySelectorAll(".fade-up").forEach(function(elemento){
     observadorEntrada.observe(elemento);
   });
-
-  /* =========================================================================
-     CONTADORES ANIMADOS DA SEÇÃO DE RESULTADOS
-     ========================================================================= */
-  function animarContador(elemento, valorFinal, sufixo, decimais){
-    const duracao = 1600;
-    const inicio = performance.now();
-
-    function passo(agora){
-      const progresso = Math.min((agora - inicio) / duracao, 1);
-      const suavizado = 1 - Math.pow(1 - progresso, 3); // easing suave
-      const valorAtual = valorFinal * suavizado;
-      elemento.textContent = valorAtual.toLocaleString("pt-BR", {
-        minimumFractionDigits: decimais,
-        maximumFractionDigits: decimais
-      }) + sufixo;
-
-      if(progresso < 1){
-        requestAnimationFrame(passo);
-      }
-    }
-    requestAnimationFrame(passo);
-  }
-
-  let contadoresJaAnimados = false;
-  const secaoNumeros = document.getElementById("resultados");
-
-  const observadorNumeros = new IntersectionObserver(function(entradas){
-    entradas.forEach(function(entrada){
-      if(entrada.isIntersecting && !contadoresJaAnimados){
-        contadoresJaAnimados = true;
-        CONFIG.numeros.forEach(function(item, indice){
-          const elemento = document.getElementById("numero-" + indice);
-          animarContador(elemento, item.valor, item.sufixo, item.decimais || 0);
-        });
-        observadorNumeros.unobserve(entrada.target);
-      }
-    });
-  }, { threshold: 0.3 });
-
-  observadorNumeros.observe(secaoNumeros);
 
 })();
 </script>
