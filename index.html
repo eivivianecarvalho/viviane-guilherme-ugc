@@ -1006,14 +1006,17 @@ const CONFIG = {
     ]
   },
 
-  // EDITE AQUI: itens do portfólio, um vídeo por nicho. A categoria precisa bater com uma das categorias abaixo em "categoriasPortfolio".
+  // EDITE AQUI: itens do portfólio. A categoria precisa bater com uma das categorias abaixo em "categoriasPortfolio".
   // Para colocar um vídeo real, publique o vídeo como "não listado" no YouTube e adicione o campo "video" com o ID dele
   // (o trecho depois de "youtu.be/" ou "shorts/" no link, sem parâmetros depois do "?"). Sem o campo "video", o card usa o gradiente.
+  // Quando um nicho tem mais de um vídeo, use "mostrarEmTodos: true" em só um deles, pra o filtro "Todos" mostrar um vídeo por nicho
+  // (os outros continuam aparecendo normalmente quando a pessoa filtra por aquele nicho específico).
   portfolio: [
-    { titulo: "Receita rápida com tempero pronto", categoria: "Comida", gradiente: "linear-gradient(135deg, #f2a65a, #e9f5c9)" },
-    { titulo: "Creatina +Mu", categoria: "Fitness", video: "Elush87N4Vc", gradiente: "linear-gradient(135deg, #1b1b1b, #d46928)" },
-    { titulo: "App Serasa", categoria: "Sites/Apps", video: "FXngtgjzc8E", gradiente: "linear-gradient(150deg, #d46928, #4a4a4a)" },
-    { titulo: "Site Serasa", categoria: "Sites/Apps", video: "uVoMlojBU4o", gradiente: "linear-gradient(135deg, #1b1b1b, #4a4a4a)" }
+    { titulo: "Club Social 1", categoria: "Comida", video: "NdzRO3kwSnA", gradiente: "linear-gradient(135deg, #f2a65a, #e9f5c9)", mostrarEmTodos: true },
+    { titulo: "Club Social 2", categoria: "Comida", video: "mLgiZBu-8N0", gradiente: "linear-gradient(150deg, #b9d97a, #d46928)", mostrarEmTodos: false },
+    { titulo: "Creatina +Mu", categoria: "Fitness", video: "Elush87N4Vc", gradiente: "linear-gradient(135deg, #1b1b1b, #d46928)", mostrarEmTodos: true },
+    { titulo: "App Serasa", categoria: "Sites/Apps", video: "FXngtgjzc8E", gradiente: "linear-gradient(150deg, #d46928, #4a4a4a)", mostrarEmTodos: true },
+    { titulo: "Site Serasa", categoria: "Sites/Apps", video: "uVoMlojBU4o", gradiente: "linear-gradient(135deg, #1b1b1b, #4a4a4a)", mostrarEmTodos: false }
   ],
 
   // EDITE AQUI: categorias usadas nos filtros do portfólio (a primeira, "Todos", é fixa)
@@ -1223,6 +1226,7 @@ const CONFIG = {
     const div = document.createElement("div");
     div.className = "item-portfolio fade-up";
     div.setAttribute("data-categoria", item.categoria);
+    div.setAttribute("data-mostrar-em-todos", item.mostrarEmTodos === false ? "false" : "true");
 
     let blocoMidia;
     if(item.video){
@@ -1247,6 +1251,16 @@ const CONFIG = {
     gradePortfolio.appendChild(div);
   });
 
+  function aplicarFiltroPortfolio(categoria){
+    gradePortfolio.querySelectorAll(".item-portfolio").forEach(function(cartao){
+      const categoriaCartao = cartao.getAttribute("data-categoria");
+      const mostrar = categoria === "Todos"
+        ? cartao.getAttribute("data-mostrar-em-todos") === "true"
+        : categoriaCartao === categoria;
+      cartao.classList.toggle("escondido", !mostrar);
+    });
+  }
+
   CONFIG.categoriasPortfolio.forEach(function(categoria, indice){
     const botao = document.createElement("button");
     botao.type = "button";
@@ -1256,16 +1270,14 @@ const CONFIG = {
     botao.addEventListener("click", function(){
       filtrosPortfolio.querySelectorAll(".filtro-botao").forEach(function(b){ b.classList.remove("ativo"); });
       botao.classList.add("ativo");
-
-      gradePortfolio.querySelectorAll(".item-portfolio").forEach(function(cartao){
-        const categoriaCartao = cartao.getAttribute("data-categoria");
-        const mostrar = categoria === "Todos" || categoriaCartao === categoria;
-        cartao.classList.toggle("escondido", !mostrar);
-      });
+      aplicarFiltroPortfolio(categoria);
       gradePortfolio.scrollTo({ left: 0 });
     });
     filtrosPortfolio.appendChild(botao);
   });
+
+  // Aplica o filtro "Todos" já na primeira renderização, pra mostrar só um vídeo por nicho de cara.
+  aplicarFiltroPortfolio(CONFIG.categoriasPortfolio[0]);
 
   // ---------- Serviços ----------
   const gradeServicos = document.getElementById("gradeServicos");
