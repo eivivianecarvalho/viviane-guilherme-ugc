@@ -1235,7 +1235,16 @@ const CONFIG = {
 
   window.onYouTubeIframeAPIReady = function(){
     playersVideoPortfolio.forEach(function(registro){
-      registro.player = new YT.Player(registro.iframe, {});
+      registro.player = new YT.Player(registro.iframe, {
+        events: {
+          // Toca e pausa na hora assim que o player carrega, só pra trocar aquela capa
+          // vermelha do YouTube pelo primeiro frame real do vídeo, sem precisar de hover antes.
+          onReady: function(evento){
+            evento.target.playVideo();
+            setTimeout(function(){ evento.target.pauseVideo(); }, 200);
+          }
+        }
+      });
     });
   };
 
