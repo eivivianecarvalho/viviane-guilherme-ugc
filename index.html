@@ -500,22 +500,25 @@
   .item-portfolio.escondido{
     display:none;
   }
-  /* Vídeo (embed do YouTube) ou bloco em gradiente, sempre no formato vertical (estilo Reels/Shorts) */
+  /* Vídeo próprio (sem marca do YouTube) ou bloco em gradiente, sempre no formato vertical (estilo Reels/Shorts) */
   .video-portfolio{
     position:relative;
     aspect-ratio: 9/16;
     background: var(--tinta);
   }
-  .video-portfolio iframe{
+  .video-portfolio video{
     position:absolute;
     inset:0;
     width:100%;
     height:100%;
-    border:0;
+    object-fit:cover;
+    display:block;
   }
-  .legenda-portfolio{ padding: 16px 18px; }
-  .legenda-portfolio .tag-categoria{
-    display:inline-block;
+  .tag-categoria-video{
+    position:absolute;
+    top: 14px;
+    left: 14px;
+    z-index:2;
     font-family: var(--fonte-titulo);
     font-size: .7rem;
     font-weight:700;
@@ -525,8 +528,29 @@
     background: var(--verde-limao);
     padding: 4px 10px;
     border-radius: 999px;
-    margin-bottom: 8px;
   }
+  .botao-play-video{
+    position:absolute;
+    top:50%; left:50%;
+    transform: translate(-50%, -50%);
+    z-index:2;
+    width: 60px;
+    height: 60px;
+    border-radius:50%;
+    border:none;
+    background: rgba(27,27,27,.55);
+    color: var(--branco);
+    font-size: 1.3rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding-left: 4px;
+    cursor:pointer;
+    transition: background .2s ease, transform .2s ease;
+  }
+  .botao-play-video:hover{ background: rgba(212,105,40,.85); transform: translate(-50%, -50%) scale(1.08); }
+  .botao-play-video.escondido{ display:none; }
+  .legenda-portfolio{ padding: 16px 18px; }
   .legenda-portfolio h3{
     font-size: 1rem;
     margin:0;
@@ -1007,16 +1031,17 @@ const CONFIG = {
   },
 
   // EDITE AQUI: itens do portfólio. A categoria precisa bater com uma das categorias abaixo em "categoriasPortfolio".
-  // Para colocar um vídeo real, publique o vídeo como "não listado" no YouTube e adicione o campo "video" com o ID dele
-  // (o trecho depois de "youtu.be/" ou "shorts/" no link, sem parâmetros depois do "?"). Sem o campo "video", o card usa o gradiente.
+  // Os vídeos ficam salvos no próprio site (pasta assets/videos), sem nenhuma marca do YouTube.
+  // Para colocar um vídeo novo: adicione o arquivo .mp4 em assets/videos/ e uma imagem de capa em assets/videos-capas/,
+  // depois use os campos "videoArquivo" e "capaVideo" apontando pra eles. Sem esses campos, o card usa o gradiente.
   // Quando um nicho tem mais de um vídeo, use "mostrarEmTodos: true" em só um deles, pra o filtro "Todos" mostrar um vídeo por nicho
   // (os outros continuam aparecendo normalmente quando a pessoa filtra por aquele nicho específico).
   portfolio: [
-    { titulo: "Club Social 1", categoria: "Comida", video: "NdzRO3kwSnA", gradiente: "linear-gradient(135deg, #f2a65a, #e9f5c9)", mostrarEmTodos: true },
-    { titulo: "Club Social 2", categoria: "Comida", video: "mLgiZBu-8N0", gradiente: "linear-gradient(150deg, #b9d97a, #d46928)", mostrarEmTodos: false },
-    { titulo: "Creatina +Mu", categoria: "Fitness", video: "Elush87N4Vc", gradiente: "linear-gradient(135deg, #1b1b1b, #d46928)", mostrarEmTodos: true },
-    { titulo: "App Serasa", categoria: "Sites/Apps", video: "FXngtgjzc8E", gradiente: "linear-gradient(150deg, #d46928, #4a4a4a)", mostrarEmTodos: true },
-    { titulo: "Site Serasa", categoria: "Sites/Apps", video: "uVoMlojBU4o", gradiente: "linear-gradient(135deg, #1b1b1b, #4a4a4a)", mostrarEmTodos: false }
+    { titulo: "Club Social 1", categoria: "Comida", videoArquivo: "assets/videos/club-social-1.mp4", capaVideo: "assets/videos-capas/club-social-1.jpg", mostrarEmTodos: true },
+    { titulo: "Club Social 2", categoria: "Comida", videoArquivo: "assets/videos/club-social-2.mp4", capaVideo: "assets/videos-capas/club-social-2.jpg", mostrarEmTodos: false },
+    { titulo: "Creatina +Mu", categoria: "Fitness", videoArquivo: "assets/videos/creatina-mu.mp4", capaVideo: "assets/videos-capas/creatina-mu.jpg", mostrarEmTodos: true },
+    { titulo: "App Serasa", categoria: "Sites/Apps", videoArquivo: "assets/videos/app-serasa.mp4", capaVideo: "assets/videos-capas/app-serasa.jpg", mostrarEmTodos: true },
+    { titulo: "Site Serasa", categoria: "Sites/Apps", videoArquivo: "assets/videos/site-serasa.mp4", capaVideo: "assets/videos-capas/site-serasa.jpg", mostrarEmTodos: false }
   ],
 
   // EDITE AQUI: categorias usadas nos filtros do portfólio (a primeira, "Todos", é fixa)
@@ -1222,32 +1247,6 @@ const CONFIG = {
   const filtrosPortfolio = document.getElementById("filtrosPortfolio");
   const gradePortfolio = document.getElementById("gradePortfolio");
 
-  // Carrega a API oficial do YouTube (só se existir algum vídeo no portfólio), pra controlar
-  // o play/pause de forma confiável quando o mouse passa em cima de cada vídeo.
-  const precisaApiYoutube = CONFIG.portfolio.some(function(item){ return item.video; });
-  const playersVideoPortfolio = [];
-
-  if(precisaApiYoutube){
-    const scriptYoutube = document.createElement("script");
-    scriptYoutube.src = "https://www.youtube.com/iframe_api";
-    document.head.appendChild(scriptYoutube);
-  }
-
-  window.onYouTubeIframeAPIReady = function(){
-    playersVideoPortfolio.forEach(function(registro){
-      registro.player = new YT.Player(registro.iframe, {
-        events: {
-          // Toca e pausa na hora assim que o player carrega, só pra trocar aquela capa
-          // vermelha do YouTube pelo primeiro frame real do vídeo, sem precisar de hover antes.
-          onReady: function(evento){
-            evento.target.playVideo();
-            setTimeout(function(){ evento.target.pauseVideo(); }, 200);
-          }
-        }
-      });
-    });
-  };
-
   CONFIG.portfolio.forEach(function(item){
     const div = document.createElement("div");
     div.className = "item-portfolio fade-up";
@@ -1255,41 +1254,33 @@ const CONFIG = {
     div.setAttribute("data-mostrar-em-todos", item.mostrarEmTodos === false ? "false" : "true");
 
     let blocoMidia;
-    if(item.video){
-      // Parâmetros que reduzem a marca do YouTube no player: modestbranding tira o logo grande,
-      // rel=0 evita sugestão de vídeos de outros canais, iv_load_policy=3 esconde anotações.
-      // enablejsapi=1 permite controlar o play/pause pelo mouse; mute=1 é necessário pro navegador
-      // deixar o vídeo começar sozinho ao passar o mouse (autoplay com som é bloqueado pelos navegadores).
-      // O clique direito fica desativado no vídeo pra dificultar um pouco copiar o link ou baixar.
-      const parametrosVideo =
-        'modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&enablejsapi=1&mute=1' +
-        '&origin=' + encodeURIComponent(window.location.origin);
+    if(item.videoArquivo){
+      // Vídeo próprio, sem nenhuma marca do YouTube: começa mostrando a capa com um botão de
+      // play; ao clicar, toca o vídeo com os controles simples do próprio navegador.
       blocoMidia =
         '<div class="video-portfolio" oncontextmenu="return false;">' +
-          '<iframe src="https://www.youtube-nocookie.com/embed/' + item.video + '?' + parametrosVideo + '" title="' + item.titulo + '" ' +
-          'loading="lazy" referrerpolicy="strict-origin-when-cross-origin" ' +
-          'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' +
+          '<video src="' + item.videoArquivo + '" poster="' + item.capaVideo + '" preload="metadata" playsinline></video>' +
+          '<button type="button" class="botao-play-video" aria-label="Reproduzir vídeo: ' + item.titulo + '"><span aria-hidden="true">▶</span></button>' +
+          '<span class="tag-categoria-video">' + item.categoria + '</span>' +
         '</div>';
     } else {
-      // Bloco em gradiente no lugar do vídeo. Para trocar por um vídeo real, adicione
-      // video: "ID_DO_VIDEO_NO_YOUTUBE" a este item lá em CONFIG.portfolio.
-      blocoMidia = '<div class="video-portfolio" style="background:' + item.gradiente + ';"></div>';
+      // Bloco em gradiente no lugar do vídeo. Para trocar por um vídeo real, adicione os campos
+      // videoArquivo e capaVideo a este item lá em CONFIG.portfolio.
+      blocoMidia = '<div class="video-portfolio" style="background:' + item.gradiente + ';">' +
+        '<span class="tag-categoria-video">' + item.categoria + '</span></div>';
     }
 
-    div.innerHTML = blocoMidia +
-      '<div class="legenda-portfolio"><span class="tag-categoria">' + item.categoria + '</span><h3>' + item.titulo + '</h3></div>';
+    div.innerHTML = blocoMidia + '<div class="legenda-portfolio"><h3>' + item.titulo + '</h3></div>';
     gradePortfolio.appendChild(div);
 
-    // Toca o vídeo (sem som) quando o mouse passa por cima, e pausa quando ele sai
-    if(item.video){
-      const registro = { iframe: div.querySelector("iframe"), player: null };
-      playersVideoPortfolio.push(registro);
-
-      div.addEventListener("mouseenter", function(){
-        if(registro.player && registro.player.playVideo) registro.player.playVideo();
-      });
-      div.addEventListener("mouseleave", function(){
-        if(registro.player && registro.player.pauseVideo) registro.player.pauseVideo();
+    // Clique no botão troca a capa pelo vídeo tocando, com os controles simples do navegador
+    if(item.videoArquivo){
+      const video = div.querySelector("video");
+      const botaoPlay = div.querySelector(".botao-play-video");
+      botaoPlay.addEventListener("click", function(){
+        video.controls = true;
+        video.play();
+        botaoPlay.classList.add("escondido");
       });
     }
   });
