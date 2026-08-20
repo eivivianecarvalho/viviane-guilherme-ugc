@@ -1222,11 +1222,22 @@ const CONFIG = {
   const filtrosPortfolio = document.getElementById("filtrosPortfolio");
   const gradePortfolio = document.getElementById("gradePortfolio");
 
-  // Manda um comando pro player do YouTube via postMessage (exige "enablejsapi=1" na URL do iframe)
-  function enviarComandoVideo(iframe, funcao){
-    if(!iframe || !iframe.contentWindow) return;
-    iframe.contentWindow.postMessage(JSON.stringify({ event: "command", func: funcao, args: [] }), "*");
+  // Carrega a API oficial do YouTube (só se existir algum vídeo no portfólio), pra controlar
+  // o play/pause de forma confiável quando o mouse passa em cima de cada vídeo.
+  const precisaApiYoutube = CONFIG.portfolio.some(function(item){ return item.video; });
+  const playersVideoPortfolio = [];
+
+  if(precisaApiYoutube){
+    const scriptYoutube = document.createElement("script");
+    scriptYoutube.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(scriptYoutube);
   }
+
+  window.onYouTubeIframeAPIReady = function(){
+    playersVideoPortfolio.forEach(function(registro){
+      registro.player = new YT.Player(registro.iframe, {});
+    });
+  };
 
   CONFIG.portfolio.forEach(function(item){
     const div = document.createElement("div");
@@ -1262,9 +1273,15 @@ const CONFIG = {
 
     // Toca o vídeo (sem som) quando o mouse passa por cima, e pausa quando ele sai
     if(item.video){
-      const iframeVideo = div.querySelector("iframe");
-      div.addEventListener("mouseenter", function(){ enviarComandoVideo(iframeVideo, "playVideo"); });
-      div.addEventListener("mouseleave", function(){ enviarComandoVideo(iframeVideo, "pauseVideo"); });
+      const registro = { iframe: div.querySelector("iframe"), player: null };
+      playersVideoPortfolio.push(registro);
+
+      div.addEventListener("mouseenter", function(){
+        if(registro.player && registro.player.playVideo) registro.player.playVideo();
+      });
+      div.addEventListener("mouseleave", function(){
+        if(registro.player && registro.player.pauseVideo) registro.player.pauseVideo();
+      });
     }
   });
 
